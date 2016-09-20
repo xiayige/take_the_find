@@ -37,7 +37,6 @@ class PictureCollectionController: UICollectionViewController,UICollectionViewDe
         self.collectionView!.registerNib(UINib.init(nibName: "PictureCollectionCell", bundle: nil), forCellWithReuseIdentifier: "PictureCollectionCell")
     }
     override func viewWillDisappear(animated: Bool) {
-        SVProgressHUD.dismiss()
         super.viewWillDisappear(animated)
     }
    

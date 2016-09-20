@@ -10,56 +10,54 @@ import UIKit
 
 class PictureSearchViewController: UIViewController {
     var type:String!
-    var dataArr = [PictureModel]()
-    var page = 1
     var hotSeatchArray:[String]?
-    var layout:UICollectionViewFlowLayout!
-     var collectionV:UICollectionView!
+    var hisToryArray:[String]?
      lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "搜索对应类别下的图片"
         return searchBar
     }()
+    lazy var tabView:UITableView = {
+        let tabView = UITableView()
+        tabView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H)
+        tabView.contentInset = UIEdgeInsetsMake(NAV_H, 0,0, 0)
+        tabView.dataSource = self
+        tabView.delegate = self
+        tabView.registerClass(GUOPictureSearchCell.self, forCellReuseIdentifier: "GUOPictureSearchCell")
+        self.view.addSubview(tabView)
+        return tabView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = backColor
         self.automaticallyAdjustsScrollViewInsets = false
+        if hotSeatchArray?.count != 0{
+             self.tabView.reloadData()
+        }
         setupNav()
-        setTheCollView()
+       
     }
-    func setTheCollView(){
-        let layout = UICollectionViewFlowLayout()
-        self.collectionV = UICollectionView(frame: CGRectMake(0, 0, 375, 667), collectionViewLayout: layout)
-        self.collectionV.backgroundColor = backColor
-        self.automaticallyAdjustsScrollViewInsets = false
-        self.collectionV.contentInset = UIEdgeInsetsMake(NAV_H , 0, TAB_H, 0)
-        self.collectionV.delegate = self
-        self.collectionV.dataSource = self
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        self.view.addSubview(collectionV)
-        layout.itemSize = CGSizeMake(SCREEN_W / 2 - 2, 200)
-        self.collectionV.registerNib(UINib.init(nibName: "PictureCollectionCell", bundle: nil), forCellWithReuseIdentifier: "PictureCollectionCell")
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        readUserSearchDefaults()
     }
-    override func viewWillDisappear(animated: Bool) {
+       override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         searchBar.resignFirstResponder()
-    }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        searchBar.becomeFirstResponder()
     }
     // 设置导航栏
     func setupNav() {
         self.navigationItem.titleView = self.searchBar
         searchBar.delegate = self
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIView())
+        let button = UIButton(type: .System)
+        button.setTitle("清空历史记录", forState: .Normal)
+        button.setTitleColor(UIColor.redColor(), forState: .Normal)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(self.cancelBtn), forControlEvents: .TouchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(navigationBackClick))
     }
-    /// 返回按钮、取消按钮点击
-    func navigationBackClick() {
-        navigationController?.popViewControllerAnimated(true)
-    }
+   
 }
 extension PictureSearchViewController: UISearchBarDelegate{
     func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
@@ -70,103 +68,119 @@ extension PictureSearchViewController: UISearchBarDelegate{
     /// 搜索按钮点击
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "checkUserType_backward_9x15_"), style: .Plain, target: self, action: #selector(navigationBackClick))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_sort_21x21_"), style: .Plain, target: self, action: #selector(sortButtonClick))
         /// 根据搜索条件进行搜索
         let keyword = searchBar.text
        //发送网络请求
         if keyword != ""{
             loadDetailData(keyword!)
         }else{
-            
+            SVProgressHUD.showWithStatus("请求参数不正确")
             SVProgressHUD.dismissWithDelay(1.0)
         }
-        
     }
+    ///清空按钮
+    func cancelBtn(){
+        alertCon("确定要清空历史记录吗?")
+    }
+    ///弹出框
+    func alertCon(message:String){
+        let alertCon = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let action = UIAlertAction(title: "好", style: UIAlertActionStyle.Default) { (alert) in
+            self.deleteSearchHistory()
+            self.tabView.reloadData()
+        }
+        let action1 = UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: nil)
+        alertCon.addAction(action)
+        alertCon.addAction(action1)
+        self.presentViewController(alertCon, animated: true, completion: nil)
+    }
+    /// 返回按钮、取消按钮点击
+    func navigationBackClick() {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    ///加载数据
     func loadDetailData(keyword:String){
-        self.collectionV.mj_header = MJRefreshStateHeader(refreshingBlock: {
-            self.page = 1
-            self.dataArr.removeAll()
-            SVProgressHUD.showWithStatus("努力搜索中....")
-            PictureModel.requestCategaryData(self.type, tag: keyword, page: self.page) { (array, error) in
-                if error == nil{
-                    self.dataArr = array!
-                    self.collectionV.reloadData()
-                    SVProgressHUD.dismiss()
-                    self.page += 1
-                    self.collectionV.mj_header.endRefreshing()
-                    self.collectionV.mj_footer.endRefreshing()
-                }else{
-                    print(error)
-                }
+       //点击搜索加载数据传递内容和keyboard
+        let detail = GUOSerachDetailViewController()
+        detail.keyword = keyword
+        detail.type = self.type
+        detail.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
+    ///读取历史记录
+    func readUserSearchDefaults(){
+        let user = NSUserDefaults.standardUserDefaults()
+        let array = user.arrayForKey("history") as? [String]
+        self.hisToryArray = array
+        self.tabView.reloadData()
+    }
+    ///删除历史记录
+    func deleteSearchHistory(){
+        let user = NSUserDefaults.standardUserDefaults()
+        user.removeObjectForKey("history")
+        user.synchronize()
+    }
+ }
+
+//MARK:UITableViewDataSource 协议方法
+extension PictureSearchViewController:UITableViewDataSource,UITableViewDelegate,GUOPictureSearchCelldelegate{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0{
+            if hotSeatchArray?.count == nil{
+                return 0
+            }else{
+                 return 1
             }
-        })
-        self.collectionV.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
-            SVProgressHUD.showWithStatus("努力搜索中....")
-            PictureModel.requestCategaryData(self.type, tag: keyword, page: self.page) { (array, error) in
-                if error == nil{
-                    let mutableArr = NSMutableArray.init(array: self.dataArr)
-                    mutableArr.addObjectsFromArray(array!)
-                    let array = NSArray.init(array: mutableArr)
-                    self.dataArr = array as! [PictureModel]
-                    self.collectionV.reloadData()
-                    self.page += 1
-                    self.collectionV.mj_header.endRefreshing()
-                    self.collectionV.mj_footer.endRefreshing()
-                    SVProgressHUD.dismiss()
-                }else{
-                    print(error)
-                }
-            }
-        })
-         self.collectionV.mj_header.beginRefreshing()
-    }
-        /// 搜索条件点击
-    func sortButtonClick() {
-      
-    }
-}
-//MARK:collectionView 协议方法
-extension PictureSearchViewController:UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,PictureCollectionCellDelegate{
-     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PictureCollectionCell", forIndexPath: indexPath) as! PictureCollectionCell
-        cell.btndelegate = self
-        if dataArr.count == 0{
-            return cell
-        }
-        let model = dataArr[indexPath.row]
-        cell.setThecell(model)
-        return cell
-    }
-   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr.count
-    }
-     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let model = dataArr[indexPath.item]
-        if model.imageUrl == nil{
-            return
-        }
-        if model.imageWidth == nil || model.imageHeight == nil{
-            let next = NextViewController()
-            next.model = model
-            next.indexPath = indexPath
-            self.presentViewController(next, animated: true, completion: nil)
-        }else if CGFloat(model.imageHeight) / CGFloat(model.imageWidth) > 1.6{
-            return
         }else{
-            let next = NextViewController()
-            next.model = model
-            next.indexPath = indexPath
-            self.presentViewController(next, animated: true, completion: nil)
+            if hisToryArray?.count == nil{
+                return 0
+            }else{
+                return (hisToryArray?.count)!
+            }
         }
         
     }
-    func btnClick(models:PictureModel){
-        let next = NextViewController()
-        next.model = models
-        self.presentViewController(next, animated: true, completion: nil)
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+       
+        if indexPath.section == 0{
+                let cell = tableView.dequeueReusableCellWithIdentifier("GUOPictureSearchCell", forIndexPath: indexPath) as! GUOPictureSearchCell
+                cell.cellClickdelegate = self
+                cell.setTheContent(hotSeatchArray!)
+                return cell
+        }else{
+            var cell = tableView.dequeueReusableCellWithIdentifier("cell")
+            if cell == nil{
+                cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cell")
+            }
+            cell?.imageView?.image = UIImage.init(named: "cm2_list_icn_recent")
+            cell?.textLabel?.text = hisToryArray![indexPath.row]
+            return cell!
+        }
+    }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return "热门搜索"
+        }else{
+            return "历史记录"
+        }
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0{
+            return 99
+        }else{
+            return 40
+        }
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("tab点击")
     }
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        searchBar.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
+    }
+    func cellDidSelected(indexpath:NSIndexPath){
+        loadDetailData(hotSeatchArray![indexpath.row])
     }
 }

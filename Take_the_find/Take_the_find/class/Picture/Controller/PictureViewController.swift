@@ -43,6 +43,7 @@ class PictureViewController: GUOBaseViewController {
         let searchBarVC = PictureSearchViewController()
         searchBarVC.type = btnArr[selectefIndex]
         searchBarVC.hotSeatchArray = cateArray
+        searchBarVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchBarVC, animated: true)
     }
      //MARK:添加子控制器

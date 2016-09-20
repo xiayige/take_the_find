@@ -8,7 +8,7 @@
 
 import Foundation
 let SCREEN_W:CGFloat = UIScreen.mainScreen().bounds.width
-let SCREEN_H:CGFloat = UIScreen.mainScreen().bounds.width
+let SCREEN_H:CGFloat = UIScreen.mainScreen().bounds.height
 let NAV_H:CGFloat = 64
 let TAB_H:CGFloat = 49
 ///图片上方label高度

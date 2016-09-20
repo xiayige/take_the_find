@@ -69,6 +69,11 @@
 		BC81272E1D91247D004051F8 /* GUOVideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC81272D1D91247D004051F8 /* GUOVideosViewController.swift */; };
 		BC8127301D91248E004051F8 /* GUOBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC81272F1D91248E004051F8 /* GUOBaseViewController.swift */; };
 		BC8127321D912808004051F8 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8127311D912808004051F8 /* Constant.swift */; };
+		BC8127371D913788004051F8 /* GUOPictureSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8127361D913788004051F8 /* GUOPictureSearchCell.swift */; };
+		BC8127391D914553004051F8 /* GUOSerachDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8127381D914553004051F8 /* GUOSerachDetailViewController.swift */; };
+		BC8127461D91586E004051F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BC8127421D91586E004051F8 /* LICENSE */; };
+		BC8127471D91586E004051F8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8127441D91586E004051F8 /* MBProgressHUD.m */; };
+		BC8127481D91586E004051F8 /* README.mdown in Sources */ = {isa = PBXBuildFile; fileRef = BC8127451D91586E004051F8 /* README.mdown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -179,13 +184,19 @@
 		BC8126E91D9123C9004051F8 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		BC8126EA1D9123C9004051F8 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		BC8126EB1D9123C9004051F8 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		BC8127281D9123EE004051F8 /* MyBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyBridge.h; path = ../../../MyBridge.h; sourceTree = "<group>"; };
 		BC8127291D91244B004051F8 /* GUOJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOJokeViewController.swift; sourceTree = "<group>"; };
 		BC81272B1D912460004051F8 /* GUOMyinfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOMyinfoViewController.swift; sourceTree = "<group>"; };
 		BC81272D1D91247D004051F8 /* GUOVideosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOVideosViewController.swift; sourceTree = "<group>"; };
 		BC81272F1D91248E004051F8 /* GUOBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOBaseViewController.swift; sourceTree = "<group>"; };
 		BC8127311D912808004051F8 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		BC8127331D912A58004051F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BC8127361D913788004051F8 /* GUOPictureSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOPictureSearchCell.swift; sourceTree = "<group>"; };
+		BC8127381D914553004051F8 /* GUOSerachDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOSerachDetailViewController.swift; sourceTree = "<group>"; };
+		BC8127401D9157B0004051F8 /* MyBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBridge.h; sourceTree = "<group>"; };
+		BC8127421D91586E004051F8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		BC8127431D91586E004051F8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		BC8127441D91586E004051F8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		BC8127451D91586E004051F8 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.mdown; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +213,7 @@
 		BC669EA21D91217800892ED0 = {
 			isa = PBXGroup;
 			children = (
+				BC8127401D9157B0004051F8 /* MyBridge.h */,
 				BC669EAD1D91217800892ED0 /* Take_the_find */,
 				BC669EAC1D91217800892ED0 /* Products */,
 			);
@@ -284,7 +296,6 @@
 		BC8126711D9123C9004051F8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				BC8127281D9123EE004051F8 /* MyBridge.h */,
 				BC8126721D9123C9004051F8 /* AppDelegate.swift */,
 				BC8126731D9123C9004051F8 /* GUOTabBarViewController.swift */,
 			);
@@ -339,6 +350,7 @@
 				BC81267A1D9123C9004051F8 /* NextViewController.swift */,
 				BC81267B1D9123C9004051F8 /* PictureCollectionController.swift */,
 				BC81267C1D9123C9004051F8 /* PictureSearchViewController.swift */,
+				BC8127381D914553004051F8 /* GUOSerachDetailViewController.swift */,
 				BC81267D1D9123C9004051F8 /* PictureViewController.swift */,
 			);
 			path = Controller;
@@ -357,6 +369,7 @@
 			children = (
 				BC8126811D9123C9004051F8 /* PictureCollectionCell.swift */,
 				BC8126821D9123C9004051F8 /* PictureCollectionCell.xib */,
+				BC8127361D913788004051F8 /* GUOPictureSearchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -364,6 +377,7 @@
 		BC8126831D9123C9004051F8 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				BC8127411D91586E004051F8 /* MBProgressHUD */,
 				BC8126841D9123C9004051F8 /* AFNetworking */,
 				BC8126921D9123C9004051F8 /* MJRefresh */,
 				BC8126BF1D9123C9004051F8 /* SDWebImage */,
@@ -574,6 +588,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		BC8127411D91586E004051F8 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BC8127421D91586E004051F8 /* LICENSE */,
+				BC8127431D91586E004051F8 /* MBProgressHUD.h */,
+				BC8127441D91586E004051F8 /* MBProgressHUD.m */,
+				BC8127451D91586E004051F8 /* README.mdown */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -634,6 +659,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC8127461D91586E004051F8 /* LICENSE in Resources */,
 				BC8127241D9123C9004051F8 /* SVProgressHUD.bundle in Resources */,
 				BC669EB91D91217800892ED0 /* LaunchScreen.storyboard in Resources */,
 				BC669EB61D91217800892ED0 /* Assets.xcassets in Resources */,
@@ -649,6 +675,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC8127371D913788004051F8 /* GUOPictureSearchCell.swift in Sources */,
+				BC8127481D91586E004051F8 /* README.mdown in Sources */,
 				BC81271F1D9123C9004051F8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				BC8127231D9123C9004051F8 /* SVProgressAnimatedView.m in Sources */,
 				BC81270B1D9123C9004051F8 /* MJRefreshNormalHeader.m in Sources */,
@@ -656,12 +684,14 @@
 				BC8126F31D9123C9004051F8 /* PictureCollectionController.swift in Sources */,
 				BC8127301D91248E004051F8 /* GUOBaseViewController.swift in Sources */,
 				BC8127251D9123C9004051F8 /* SVProgressHUD.m in Sources */,
+				BC8127471D91586E004051F8 /* MBProgressHUD.m in Sources */,
 				BC8127101D9123C9004051F8 /* UIScrollView+MJRefresh.m in Sources */,
 				BC8127321D912808004051F8 /* Constant.swift in Sources */,
 				BC8126F51D9123C9004051F8 /* PictureViewController.swift in Sources */,
 				BC8127201D9123C9004051F8 /* UIImageView+WebCache.m in Sources */,
 				BC8126FA1D9123C9004051F8 /* AFNetworkReachabilityManager.m in Sources */,
 				BC8126FE1D9123C9004051F8 /* AFURLSessionManager.m in Sources */,
+				BC8127391D914553004051F8 /* GUOSerachDetailViewController.swift in Sources */,
 				BC81271B1D9123C9004051F8 /* UIButton+WebCache.m in Sources */,
 				BC8127111D9123C9004051F8 /* UIView+MJExtension.m in Sources */,
 				BC8127051D9123C9004051F8 /* MJRefreshAutoNormalFooter.m in Sources */,
