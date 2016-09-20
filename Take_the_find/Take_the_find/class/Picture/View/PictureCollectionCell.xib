@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PictureCollectionCell" customModule="targetApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="199" height="172"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="199" height="172"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJj-XB-Zzu">
+                        <rect key="frame" x="5" y="5" width="189" height="23"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="8aw-np-o5R"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b7Z-ml-fsI">
+                        <rect key="frame" x="8" y="28" width="183" height="136"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="8hi-Uw-gv7"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8hi-Uw-gv7"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOd-t7-BBh">
+                        <rect key="frame" x="29" y="85" width="142" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="142" id="D67-aD-kdZ"/>
+                            <constraint firstAttribute="height" constant="22" id="Y0l-Uk-FMP"/>
+                        </constraints>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="-9" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-19" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="点击展开" image="see-big-picture" backgroundImage="see-big-picture-background"/>
+                        <connections>
+                            <action selector="btnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="iLt-3z-o8F"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.90048076923076914" green="0.90048076923076914" blue="0.90048076923076914" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="IJj-XB-Zzu" secondAttribute="trailing" constant="5" id="8Bj-KL-Oz2"/>
+                <constraint firstItem="IJj-XB-Zzu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="BHB-0i-LhO"/>
+                <constraint firstItem="b7Z-ml-fsI" firstAttribute="top" secondItem="IJj-XB-Zzu" secondAttribute="bottom" id="FqL-zR-Nv8"/>
+                <constraint firstAttribute="trailing" secondItem="b7Z-ml-fsI" secondAttribute="trailing" constant="8" id="SaS-ge-TUF"/>
+                <constraint firstItem="IJj-XB-Zzu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ccJ-0X-hjP"/>
+                <constraint firstItem="xOd-t7-BBh" firstAttribute="centerX" secondItem="b7Z-ml-fsI" secondAttribute="centerX" id="dvA-jm-NTx"/>
+                <constraint firstAttribute="bottom" secondItem="b7Z-ml-fsI" secondAttribute="bottom" constant="8" id="opn-Wa-wRL"/>
+                <constraint firstItem="b7Z-ml-fsI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="pug-Ku-bXT"/>
+                <constraint firstItem="xOd-t7-BBh" firstAttribute="leading" secondItem="b7Z-ml-fsI" secondAttribute="leading" constant="10" id="wFS-as-bMp"/>
+                <constraint firstItem="xOd-t7-BBh" firstAttribute="bottom" secondItem="b7Z-ml-fsI" secondAttribute="bottom" constant="-10" id="wuF-95-Pd5"/>
+                <constraint firstItem="xOd-t7-BBh" firstAttribute="centerY" secondItem="b7Z-ml-fsI" secondAttribute="centerY" id="zey-rZ-pgM"/>
+            </constraints>
+            <size key="customSize" width="199" height="172"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="wFS-as-bMp"/>
+                    <exclude reference="wuF-95-Pd5"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="btnC" destination="xOd-t7-BBh" id="DEg-nr-Tjy"/>
+                <outlet property="imageV" destination="b7Z-ml-fsI" id="RHU-sS-ABH"/>
+                <outlet property="titleL" destination="IJj-XB-Zzu" id="5M3-ib-tRW"/>
+            </connections>
+            <point key="canvasLocation" x="282.5" y="204"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="see-big-picture" width="19" height="19"/>
+        <image name="see-big-picture-background" width="285" height="43"/>
+    </resources>
+</document>
