@@ -35,7 +35,7 @@ class GUOSerachDetailViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //在这里面进行网络请求
-        addSearchText("\(self.type!)--\(self.keyword!)")
+        addSearchText("\(self.type)--\(self.keyword!)")
         loadDetailData(self.keyword!)
     }
     ///把历史记录写入本地数据
@@ -47,6 +47,13 @@ class GUOSerachDetailViewController: UIViewController {
             array = NSArray() as [AnyObject]
         }
         let arrayM = NSMutableArray.init(array: array!)
+        for str in arrayM{
+            let str1 = str as! String
+            if str1 == text{
+                return
+            }
+        
+        }
         arrayM.insertObject(text, atIndex: 0)
         if arrayM.count > 15{
             arrayM.removeObjectAtIndex(0)
@@ -80,11 +87,6 @@ class GUOSerachDetailViewController: UIViewController {
         layout.itemSize = CGSizeMake(SCREEN_W / 2 - 2, 200)
         self.collectionV.registerNib(UINib.init(nibName: "PictureCollectionCell", bundle: nil), forCellWithReuseIdentifier: "PictureCollectionCell")
     }
-/// 搜索条件点击
-    func sortButtonClick() {
-        
-    }
-
 }
 extension GUOSerachDetailViewController:UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,PictureCollectionCellDelegate{
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

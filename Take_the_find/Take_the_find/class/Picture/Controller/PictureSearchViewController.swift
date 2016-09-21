@@ -21,6 +21,7 @@ class PictureSearchViewController: UIViewController {
         let tabView = UITableView()
         tabView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H)
         tabView.contentInset = UIEdgeInsetsMake(NAV_H, 0,0, 0)
+        tabView.backgroundColor = backColor
         tabView.dataSource = self
         tabView.delegate = self
         tabView.registerClass(GUOPictureSearchCell.self, forCellReuseIdentifier: "GUOPictureSearchCell")
@@ -50,7 +51,10 @@ class PictureSearchViewController: UIViewController {
         self.navigationItem.titleView = self.searchBar
         searchBar.delegate = self
         let button = UIButton(type: .System)
+        button.layer.borderWidth = 0.8
+        button.layer.borderColor = UIColor.blackColor().CGColor
         button.setTitle("清空历史记录", forState: .Normal)
+        button.titleLabel?.font = UIFont.systemFontOfSize(14)
         button.setTitleColor(UIColor.redColor(), forState: .Normal)
         button.sizeToFit()
         button.addTarget(self, action: #selector(self.cancelBtn), forControlEvents: .TouchUpInside)
@@ -72,7 +76,7 @@ extension PictureSearchViewController: UISearchBarDelegate{
         let keyword = searchBar.text
        //发送网络请求
         if keyword != ""{
-            loadDetailData(keyword!)
+            loadDetailData(keyword!, type: nil)
         }else{
             SVProgressHUD.showWithStatus("请求参数不正确")
             SVProgressHUD.dismissWithDelay(1.0)
@@ -87,6 +91,7 @@ extension PictureSearchViewController: UISearchBarDelegate{
         let alertCon = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         let action = UIAlertAction(title: "好", style: UIAlertActionStyle.Default) { (alert) in
             self.deleteSearchHistory()
+            self.hisToryArray?.removeAll()
             self.tabView.reloadData()
         }
         let action1 = UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: nil)
@@ -99,11 +104,15 @@ extension PictureSearchViewController: UISearchBarDelegate{
         navigationController?.popViewControllerAnimated(true)
     }
     ///加载数据
-    func loadDetailData(keyword:String){
+    func loadDetailData(keyword:String,type:String?){
        //点击搜索加载数据传递内容和keyboard
         let detail = GUOSerachDetailViewController()
         detail.keyword = keyword
-        detail.type = self.type
+        if type == nil{
+          detail.type = self.type
+        }else{
+            detail.type = type
+        }
         detail.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detail, animated: true)
     }
@@ -119,6 +128,7 @@ extension PictureSearchViewController: UISearchBarDelegate{
         let user = NSUserDefaults.standardUserDefaults()
         user.removeObjectForKey("history")
         user.synchronize()
+        
     }
  }
 
@@ -151,6 +161,8 @@ extension PictureSearchViewController:UITableViewDataSource,UITableViewDelegate,
             var cell = tableView.dequeueReusableCellWithIdentifier("cell")
             if cell == nil{
                 cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cell")
+                cell?.textLabel?.textColor = UIColor.brownColor()
+                cell?.textLabel?.font = UIFont.systemFontOfSize(16)
             }
             cell?.imageView?.image = UIImage.init(named: "cm2_list_icn_recent")
             cell?.textLabel?.text = hisToryArray![indexPath.row]
@@ -175,12 +187,19 @@ extension PictureSearchViewController:UITableViewDataSource,UITableViewDelegate,
         }
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("tab点击")
+        if indexPath.section == 0{
+            return
+        }else{
+            let str = hisToryArray![indexPath.row] as NSString
+            let array = str.componentsSeparatedByString("--")
+            loadDetailData(array[1], type: array[0])
+        }
     }
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.searchBar.resignFirstResponder()
     }
     func cellDidSelected(indexpath:NSIndexPath){
-        loadDetailData(hotSeatchArray![indexpath.row])
+        loadDetailData(hotSeatchArray![indexpath.row], type: nil)
     }
+    
 }
