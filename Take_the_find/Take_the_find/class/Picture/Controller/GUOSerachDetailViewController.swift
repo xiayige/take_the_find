@@ -21,6 +21,9 @@ class GUOSerachDetailViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         setupNav()
        setTheCollView()
+        //在这里面进行网络请求
+        addSearchText("\(self.type)--\(self.keyword!)")
+        loadDetailData(self.keyword!)
     }
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -34,9 +37,6 @@ class GUOSerachDetailViewController: UIViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //在这里面进行网络请求
-        addSearchText("\(self.type)--\(self.keyword!)")
-        loadDetailData(self.keyword!)
     }
     ///把历史记录写入本地数据
     func addSearchText(text:String){

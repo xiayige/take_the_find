@@ -13,4 +13,5 @@
 #import "MJRefresh.h"
 #import "SVProgressHUD.h"
 #import <Photos/Photos.h>
+#import "SDCycleScrollView.h"//轮播视图的头文件
 #endif /* MyBridge_h */
