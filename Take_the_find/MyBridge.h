@@ -9,6 +9,7 @@
 #ifndef MyBridge_h
 #define MyBridge_h
 #import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 #import "AFNetworking.h"
 #import "MJRefresh.h"
 #import "SVProgressHUD.h"

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC4EF3731D93807A00748931 /* NewUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EF36D1D93807A00748931 /* NewUserController.swift */; };
+		BC4EF3741D93807A00748931 /* NewUserController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4EF36E1D93807A00748931 /* NewUserController.xib */; };
+		BC4EF3781D939C4F00748931 /* Mine.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC4EF3771D939C4F00748931 /* Mine.plist */; };
+		BC4EF37B1D939F5C00748931 /* GUOLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EF3791D939F5C00748931 /* GUOLoginViewController.swift */; };
+		BC4EF37E1D939F9600748931 /* GUOLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4EF37D1D939F9600748931 /* GUOLoginViewController.xib */; };
+		BC4EF3801D93AA0100748931 /* LoginAndResgiest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EF37F1D93AA0100748931 /* LoginAndResgiest.swift */; };
+		BC4EF3851D93E1C100748931 /* GUOMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EF3831D93E1C100748931 /* GUOMessageViewController.swift */; };
+		BC4EF3861D93E1C100748931 /* GUOMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4EF3841D93E1C100748931 /* GUOMessageViewController.xib */; };
+		BC4EF3881D94052B00748931 /* GUOmessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EF3871D94052B00748931 /* GUOmessageDetailViewController.swift */; };
 		BC669EB61D91217800892ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC669EB51D91217800892ED0 /* Assets.xcassets */; };
 		BC669EB91D91217800892ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC669EB71D91217800892ED0 /* LaunchScreen.storyboard */; };
 		BC6A3A6D1D9270F700025A4C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6A39DE1D9270F700025A4C /* Constant.swift */; };
@@ -90,6 +99,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC4EF36D1D93807A00748931 /* NewUserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserController.swift; sourceTree = "<group>"; };
+		BC4EF36E1D93807A00748931 /* NewUserController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserController.xib; sourceTree = "<group>"; };
+		BC4EF3771D939C4F00748931 /* Mine.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Mine.plist; sourceTree = "<group>"; };
+		BC4EF3791D939F5C00748931 /* GUOLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOLoginViewController.swift; sourceTree = "<group>"; };
+		BC4EF37D1D939F9600748931 /* GUOLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GUOLoginViewController.xib; sourceTree = "<group>"; };
+		BC4EF37F1D93AA0100748931 /* LoginAndResgiest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAndResgiest.swift; sourceTree = "<group>"; };
+		BC4EF3831D93E1C100748931 /* GUOMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOMessageViewController.swift; sourceTree = "<group>"; };
+		BC4EF3841D93E1C100748931 /* GUOMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GUOMessageViewController.xib; sourceTree = "<group>"; };
+		BC4EF3871D94052B00748931 /* GUOmessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOmessageDetailViewController.swift; sourceTree = "<group>"; };
 		BC669EAB1D91217800892ED0 /* Take_the_find.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Take_the_find.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC669EB51D91217800892ED0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC669EB81D91217800892ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -341,6 +359,8 @@
 				BC6A39E91D9270F700025A4C /* Controller */,
 				BC6A39EB1D9270F700025A4C /* model */,
 				BC6A39EC1D9270F700025A4C /* views */,
+				BC4EF36D1D93807A00748931 /* NewUserController.swift */,
+				BC4EF36E1D93807A00748931 /* NewUserController.xib */,
 			);
 			path = Myinfo;
 			sourceTree = "<group>";
@@ -349,6 +369,9 @@
 			isa = PBXGroup;
 			children = (
 				BC6A39EA1D9270F700025A4C /* GUOMyinfoViewController.swift */,
+				BC4EF3831D93E1C100748931 /* GUOMessageViewController.swift */,
+				BC4EF3841D93E1C100748931 /* GUOMessageViewController.xib */,
+				BC4EF3871D94052B00748931 /* GUOmessageDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -356,6 +379,7 @@
 		BC6A39EB1D9270F700025A4C /* model */ = {
 			isa = PBXGroup;
 			children = (
+				BC4EF37F1D93AA0100748931 /* LoginAndResgiest.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -363,6 +387,9 @@
 		BC6A39EC1D9270F700025A4C /* views */ = {
 			isa = PBXGroup;
 			children = (
+				BC4EF3771D939C4F00748931 /* Mine.plist */,
+				BC4EF3791D939F5C00748931 /* GUOLoginViewController.swift */,
+				BC4EF37D1D939F9600748931 /* GUOLoginViewController.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -728,14 +755,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC4EF3861D93E1C100748931 /* GUOMessageViewController.xib in Resources */,
 				BC6A3ADB1D92C16A00025A4C /* GUOHeadView.xib in Resources */,
 				BC6A3AD71D929D1A00025A4C /* GUOVideoDetailCell.xib in Resources */,
 				BC669EB91D91217800892ED0 /* LaunchScreen.storyboard in Resources */,
+				BC4EF3781D939C4F00748931 /* Mine.plist in Resources */,
 				BC6A3AAA1D9270F700025A4C /* SVProgressHUD.bundle in Resources */,
 				BC669EB61D91217800892ED0 /* Assets.xcassets in Resources */,
 				BC6A3A821D9270F700025A4C /* LICENSE in Resources */,
+				BC4EF37E1D939F9600748931 /* GUOLoginViewController.xib in Resources */,
 				BC6A3A931D9270F700025A4C /* MJRefresh.bundle in Resources */,
 				BC6A3A7B1D9270F700025A4C /* PictureCollectionCell.xib in Resources */,
+				BC4EF3741D93807A00748931 /* NewUserController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +785,7 @@
 				BC6A3AAB1D9270F700025A4C /* SVProgressHUD.m in Sources */,
 				BC6A3AA91D9270F700025A4C /* SVProgressAnimatedView.m in Sources */,
 				BC6A3A701D9270F700025A4C /* AppDelegate.swift in Sources */,
+				BC4EF3801D93AA0100748931 /* LoginAndResgiest.swift in Sources */,
 				BC6A3A771D9270F700025A4C /* PictureViewController.swift in Sources */,
 				BC6A3A8C1D9270F700025A4C /* MJRefreshAutoStateFooter.m in Sources */,
 				BC6A3A991D9270F700025A4C /* NSData+ImageContentType.m in Sources */,
@@ -773,6 +805,7 @@
 				BC6A3AA51D9270F700025A4C /* UIImageView+HighlightedWebCache.m in Sources */,
 				BC6A3A861D9270F700025A4C /* MJRefreshBackFooter.m in Sources */,
 				BC6A3AA11D9270F700025A4C /* UIButton+WebCache.m in Sources */,
+				BC4EF3881D94052B00748931 /* GUOmessageDetailViewController.swift in Sources */,
 				BC6A3A6D1D9270F700025A4C /* Constant.swift in Sources */,
 				BC6A3AA61D9270F700025A4C /* UIImageView+WebCache.m in Sources */,
 				BC6A3A8D1D9270F700025A4C /* MJRefreshBackGifFooter.m in Sources */,
@@ -794,8 +827,10 @@
 				BC6A3AAF1D92714A00025A4C /* VideoModel.swift in Sources */,
 				BC6A3A7E1D9270F700025A4C /* AFSecurityPolicy.m in Sources */,
 				BC6A3A831D9270F700025A4C /* MBProgressHUD.m in Sources */,
+				BC4EF3731D93807A00748931 /* NewUserController.swift in Sources */,
 				BC6A3ACA1D92886600025A4C /* TAPageControl.m in Sources */,
 				BC6A3A7A1D9270F700025A4C /* PictureCollectionCell.swift in Sources */,
+				BC4EF3851D93E1C100748931 /* GUOMessageViewController.swift in Sources */,
 				BC6A3AA21D9270F700025A4C /* UIImage+GIF.m in Sources */,
 				BC6A3AD61D929D1A00025A4C /* GUOVideoDetailCell.swift in Sources */,
 				BC6A3AC71D92886600025A4C /* TAAbstractDotView.m in Sources */,
@@ -815,6 +850,7 @@
 				BC6A3A911D9270F700025A4C /* MJRefreshNormalHeader.m in Sources */,
 				BC6A3A7C1D9270F700025A4C /* AFHTTPSessionManager.m in Sources */,
 				BC6A3AA71D9270F700025A4C /* UIView+WebCacheOperation.m in Sources */,
+				BC4EF37B1D939F5C00748931 /* GUOLoginViewController.swift in Sources */,
 				BC6A3A9A1D9270F700025A4C /* SDImageCache.m in Sources */,
 				BC6A3A6E1D9270F700025A4C /* GUOBaseViewController.swift in Sources */,
 				BC6A3A761D9270F700025A4C /* PictureSearchViewController.swift in Sources */,
