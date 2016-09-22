@@ -13,7 +13,7 @@ class GUOHeadView: UIView {
     @IBOutlet weak var titleL: UILabel!
     static func headView(headtitle:String) -> GUOHeadView{
         let headV = NSBundle.mainBundle().loadNibNamed("GUOHeadView", owner: self, options: nil).last as! GUOHeadView
-        headV.layer.cornerRadius = 10
+        headV.layer.cornerRadius = videoConr
         headV.layer.masksToBounds = true
         headV.titleL.text = headtitle
         return headV

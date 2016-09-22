@@ -25,29 +25,28 @@ class GUOVideoDetailCell: UICollectionViewCell {
     }
     @IBAction func arrowBtnClick(sender: UIButton) {
         if istrue{
-            UIView.animateWithDuration(0.25, animations: {
-                self.contentLH.constant = self.model.fnameH + 10
+            UIView.animateWithDuration(videoLength, animations: {
+                self.contentLH.constant = self.model.fnameH + 2
                 self.viewH.constant = self.model.fnameH
                 self.layoutIfNeeded()
             })
             sender.setBackgroundImage(UIImage.init(named: "arrow_carrot_dwnn_alt_72px_1143268_easyicon.net-1"), forState: .Normal)
         }else{
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animateWithDuration(videoLength, animations: {
                 self.viewH.constant = 0
                 self.contentLH.constant = 0
                 self.layoutIfNeeded()
             })
             sender.setBackgroundImage(UIImage.init(named: "arrow_carrot_up_alt_72px_1143276_easyicon.net"), forState: .Normal)
         }
-       
+        model.cellH = self.model.fnameH  + 8
         fnameL.text = model.fname
         istrue = !istrue
     }
     func setcellWithModel(model:VideoModel){
         self.viewH.constant = 0
         self.contentLH.constant = 0
-        self.model = model
-        imageV.layer.cornerRadius = 10
+        imageV.layer.cornerRadius = videoConr
         imageV.layer.masksToBounds = true
         let str = "http://www.cat666.com/" + model.thumb
         imageV.sd_setImageWithURL(NSURL.init(string: str))
@@ -56,6 +55,7 @@ class GUOVideoDetailCell: UICollectionViewCell {
         let danmuStr = "\(model.videodanmu)条弹幕"
         danmuBtn.setTitle(danmuStr, forState: .Normal)
         videoLengL.text = model.videotime
+        self.model = model
     }
 
 }

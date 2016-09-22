@@ -23,7 +23,15 @@ let labelH:CGFloat = 23
 /************视频模块*/
 ///上方广告条高度
 let adviewH:CGFloat = 150
+///视频的间隔
+let videoSpace:CGFloat = 5
 ///视频cell高度
-let videoH:CGFloat = 280
+let videoH:CGFloat = 248
 ///视频cell宽度
-let videoW:CGFloat = 204
+let videoW:CGFloat = (SCREEN_W - 3 * videoSpace)*0.5
+///视频内容label的宽度
+let videoContentLH:CGFloat = 150
+///动画时长
+let videoLength:Double = 0.25
+///圆角半径
+let videoConr:CGFloat = 10

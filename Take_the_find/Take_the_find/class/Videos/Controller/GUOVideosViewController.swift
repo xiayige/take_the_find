@@ -54,9 +54,6 @@ class GUOVideosViewController: GUOBaseViewController,SDCycleScrollViewDelegate {
         self.automaticallyAdjustsScrollViewInsets = false
         tabView.dataSource = self
         tabView.delegate = self
-        tabView.sectionHeaderHeight = 20
-        tabView.sectionFooterHeight = 20
-        tabView.rowHeight = videoH
         tabView.allowsSelection = false
         tabView.backgroundColor = backColor
         tabView.tableHeaderView = adView
@@ -86,5 +83,8 @@ extension GUOVideosViewController:UITableViewDataSource,UITableViewDelegate{
         let str = cateArray![section]
         let headV = GUOHeadView.headView(str)
         return headV
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 249
     }
 }

@@ -22,9 +22,11 @@ class VideoModel: NSObject {
     var bigpic:String!
     ///弹幕数量
     var videodanmu:String!
+    ///cell的高度
+    var cellH:CGFloat = 245
     var fnameH:CGFloat!{
         let str = self.fname as NSString
-        let height = str.boundingRectWithSize(CGSizeMake(150, 9999), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(15)], context: nil).height
+        let height = str.boundingRectWithSize(CGSizeMake(videoContentLH, 9999), options: [.UsesLineFragmentOrigin,.UsesFontLeading], attributes: [NSFontAttributeName:UIFont.systemFontOfSize(15)], context: nil).height
         return height
     }
     static func modelwithDict(dict:[String:String])->VideoModel{

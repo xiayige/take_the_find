@@ -22,17 +22,16 @@ class GUOVideoViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout,UICol
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Horizontal
         layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 5
+        layout.minimumLineSpacing = videoSpace
         var rect = self.bounds
-        rect.origin.y = 5
-        rect.origin.x = 5
-        rect.size.width = rect.width - 10
-        rect.size.height = rect.height - 10
+        rect.origin.x = videoSpace
+        rect.size.width = rect.width - 2 * videoSpace
         collV = UICollectionView(frame: rect, collectionViewLayout: layout)
         collV.registerNib(UINib.init(nibName: "GUOVideoDetailCell", bundle: nil), forCellWithReuseIdentifier: "GUOVideoDetailCell")
         collV.dataSource = self
         collV.backgroundColor = UIColor.whiteColor()
         collV.bounces = false
+        collV.pagingEnabled = true
         collV.showsHorizontalScrollIndicator = false
         collV.delegate = self
         self.addSubview(collV)
@@ -50,6 +49,6 @@ class GUOVideoViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout,UICol
         print(dataArr[indexPath.row].fname)
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(videoW, videoH)
+        return CGSizeMake(videoW , videoH )
     }
 }
