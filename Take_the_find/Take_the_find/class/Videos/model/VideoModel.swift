@@ -12,6 +12,8 @@ class VideoModel: NSObject {
     var thumb:String!
     ///描述
     var fname:String!
+    ///视频ID
+    var id:String!
     ///观看数量
     var viewcounts:String!
     ///视频时间
@@ -38,6 +40,7 @@ class VideoModel: NSObject {
         
     }
 }
+
 extension VideoModel{
     static func requestgetRecommendVideoData(callBack:(bannarArray:[VideoModel]?,cateArray:[String]?,modelsArray:NSMutableArray?,error:NSError?)->Void){
         let url = "http://cat666.com/cat666-interface/index.php/index/getRecommend"
@@ -75,4 +78,20 @@ extension VideoModel{
                 callBack(bannarArray: nil, cateArray: nil, modelsArray: nil, error: error)
         }
     }
+    static func requestgetVideoInfoData(videoID:String,callBack:(usermodel:UserModel?,videomodel:VideoModel?,error:NSError?)->Void){
+        let url = "http://cat666.com/cat666-interface/index.php/index/getVideoInfo"
+        let manger = AFHTTPSessionManager()
+        manger.responseSerializer = AFHTTPResponseSerializer()
+        let para = NSMutableDictionary()
+        para["videoid"] = videoID
+        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+            let videoM = VideoModel.modelwithDict(obj["video"] as! [String:String])
+            let userM = UserModel.modelWithDict(obj["user"] as! [String:String])
+            callBack(usermodel: userM, videomodel: videoM, error:nil)
+            }) { (task, error) in
+                callBack(usermodel:nil, videomodel: nil, error: error)
+        }
+    }
+
 }

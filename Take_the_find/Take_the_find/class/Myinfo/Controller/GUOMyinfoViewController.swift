@@ -15,14 +15,11 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
     lazy var tableView:UITableView = {
         
         let table = UITableView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height), style: UITableViewStyle.Grouped)
-        
         table.showsVerticalScrollIndicator = false
         table.bounces = false
         table.tableHeaderView = self.headerView
         table.delegate = self
         table.dataSource = self
-        
-        
         return table
     }()
     
@@ -37,7 +34,6 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
         setBtn.addTarget(self, action: #selector(self.settingBtnClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         header.addSubview(setBtn)
         let blackView = UIView.init(frame: CGRectMake(0, header.frame.size.height - 100, header.frame.size.width, 100))
-        
         blackView.backgroundColor = UIColor.blackColor()
         blackView.alpha = 0.5
         header.addSubview(blackView)
@@ -65,16 +61,12 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
     }()
     
     lazy var dataArray: NSMutableArray = {
-        
         let path = NSBundle.mainBundle().pathForResource("Mine", ofType: "plist")
         let array = NSMutableArray.init(contentsOfFile: path!)
         return array!
-        
     }()
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
         self.view.addSubview(self.tableView)
         tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         self.tableView.tableHeaderView = self.headerView
@@ -88,31 +80,41 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
         self.navigationController?.pushViewController(login, animated: true)
     }
     override func viewWillAppear(animated: Bool) {
-        
+         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
         setTheHeadView()
     }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     ///判断用户状态
     func setTheHeadView(){
-        if UserModel.shareUser.email == nil{
-            self.headImage.image = UIImage.init(named: "setup-head-default")
-            self.nameL.hidden = true
-            self.nickL.text = "快去登录吧，发现更多精彩世界"
-            self.nickL.textColor = UIColor.whiteColor()
-            self.tableView.reloadData()
-        }else{
+        if isLogin {
+            //登录
             self.nameL.hidden = false
-            self.nameL.text = UserModel.shareUser.email
-            if UserModel.shareUser.address == ""{
+            if UserModel.shareUser.uname == nil{
+                self.nameL.text = UserModel.shareUser.email
+            }else{
+                self.nameL.text = UserModel.shareUser.uname
+            }
+            
+            if UserModel.shareUser.info == ""{
                 self.nickL.text = "这个人太懒了，没有签名,设置个人信息吧"
             }else{
-                self.nickL.text = UserModel.shareUser.address
+                self.nickL.text = UserModel.shareUser.info
             }
             self.nickL.textColor = UIColor.whiteColor()
             if UserModel.shareUser.headpic != nil{
                 let str = "http://cat666.com/" + UserModel.shareUser.headpic!
                 self.headImage.sd_setImageWithURL(NSURL.init(string: str))
             }
+            self.tableView.reloadData()
+        }else{
+            self.headImage.image = UIImage.init(named: "setup-head-default")
+            self.nameL.hidden = true
+            self.nickL.text = "快去登录吧，发现更多精彩世界"
+            self.nickL.textColor = UIColor.whiteColor()
             self.tableView.reloadData()
         }
     }
@@ -184,7 +186,6 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
         
         return 1
     }
-    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let  view = UIView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, 5))

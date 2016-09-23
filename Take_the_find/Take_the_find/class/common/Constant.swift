@@ -35,3 +35,8 @@ let videoContentLH:CGFloat = 150
 let videoLength:Double = 0.25
 ///圆角半径
 let videoConr:CGFloat = 10
+///打印网络数据
+func printData(data:NSData){
+    let str = NSString.init(data:data, encoding: NSUTF8StringEncoding)
+    print(str!)
+}

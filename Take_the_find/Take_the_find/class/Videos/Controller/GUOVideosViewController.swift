@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GUOVideosViewController: GUOBaseViewController,SDCycleScrollViewDelegate {
+class GUOVideosViewController: GUOBaseViewController,SDCycleScrollViewDelegate,GUOVideoViewCellDelegate{
     var bannarArray:[VideoModel]?
     var cateArray:[String]?
     var modelsArray:NSMutableArray?
@@ -71,6 +71,9 @@ extension GUOVideosViewController:UITableViewDataSource,UITableViewDelegate{
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCellWithIdentifier("GUOVideoViewCell", forIndexPath: indexPath) as! GUOVideoViewCell
+        if indexPath.row == 0{
+            cell.CellDelegate = self
+        }
         cell.backgroundColor = backColor
         let modelArr = modelsArray![indexPath.section] as! [VideoModel]
         cell.dataArr = modelArr
@@ -86,5 +89,8 @@ extension GUOVideosViewController:UITableViewDataSource,UITableViewDelegate{
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 249
+    }
+    func cellClick(videoM: VideoModel?, userM: UserModel?, error: NSError?) {
+        print(videoM?.fname,userM?.info)
     }
 }

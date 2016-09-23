@@ -7,9 +7,12 @@
 //
 
 import UIKit
-
+protocol GUOVideoViewCellDelegate:NSObjectProtocol {
+    func cellClick(videoM:VideoModel?,userM:UserModel?,error:NSError?)
+}
 class GUOVideoViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource{
     var dataArr:[VideoModel]!
+    weak var CellDelegate:GUOVideoViewCellDelegate?
     var collV:UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,7 +49,17 @@ class GUOVideoViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout,UICol
         return cell
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(dataArr[indexPath.row].fname)
+        let model = dataArr[indexPath.row]
+        VideoModel.requestgetVideoInfoData(model.id) { (usermodel, videomodel, error) in
+            if error == nil{
+                self.CellDelegate?.cellClick(videomodel, userM: usermodel, error: nil)
+            }else{
+                SVProgressHUD.showErrorWithStatus("请求出现错误")
+                self.CellDelegate?.cellClick(nil, userM: nil, error: error)
+            }
+            
+        }
+        
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(videoW , videoH )

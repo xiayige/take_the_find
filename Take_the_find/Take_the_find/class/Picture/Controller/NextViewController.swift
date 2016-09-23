@@ -75,41 +75,27 @@ class NextViewController: UIViewController {
     }
     func btnClick(btn:UIButton){
       //利用SDWebimage取出图片
-        if btn.tag == 100{
-            //保存到本地
-            print("保存到本地")
-           savaImage()
-        }else{
-            //设置为壁纸
-            print("设置为壁纸")
+         SDWebImageManager.sharedManager().downloadImageWithURL(NSURL.init(string: (model?.imageUrl)!), options: SDWebImageOptions.init(rawValue: 0), progress: nil) { (image, error, cacheType, BOOL, imageURL) in
+            if error == nil{
+                //let image = SDImageCache.sharedImageCache().storeImage(<#T##image: UIImage!##UIImage!#>, forKey: <#T##String!#>)
+            }
         }
     }
     //保存图片
     func savaImage(){
-        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-             let req = PHAssetChangeRequest.creationRequestForAssetFromImage(self.image)
-            }) { (success, error) in
-                var title: String!
-                if error != nil
-                {
-                    title = "图片保存失败-"
-                } else {
-                    title = "图片保存成功"
-                }
-                let alert = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
-                let confirmAction = UIAlertAction(title: "OK", style: .Default) { (_) in
-                    
-                }
-                let cancelAction = UIAlertAction(title: "cancel", style: .Cancel) { (_) in
-                }
-                alert.addAction(confirmAction)
-                alert.addAction(cancelAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-        }
-        
-    //UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
-    @objc func image(image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject)
+    func alert(title:String){
+        let alert = UIAlertController(title: "提示", message: title, preferredStyle: .Alert)
+        let confirmAction = UIAlertAction(title: "OK", style: .Default) { (_) in
+            
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .Cancel) { (_) in
+        }
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+     func image(image: UIImage, didFinishSavingWithError: NSError?,contextInfo: AnyObject)
     {
         var title: String!
         if didFinishSavingWithError != nil
