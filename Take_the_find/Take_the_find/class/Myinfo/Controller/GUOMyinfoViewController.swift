@@ -41,8 +41,10 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
         let imageH:CGFloat = 70
         self.headImage = UIImageView.init(frame: CGRectMake(20, blackView.frame.origin.y - imageH/2, imageH, imageH))
         self.nameL = UILabel.init(frame: CGRectMake(20 + imageH + 20, blackView.frame.origin.y - imageH/2 + 30, 100, imageH))
+        
         self.nameL.textColor = UIColor.whiteColor()
         self.nameL.textAlignment = .Center
+        self.nameL.numberOfLines = 0
         self.nameL.font = UIFont.boldSystemFontOfSize(15)
         header.addSubview(self.nameL)
         self.headImage.image = UIImage.init(named: "setup-head-default")

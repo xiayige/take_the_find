@@ -8,10 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="GUOVideoDetailCell" customModule="Take_the_find" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="204" height="248"/>
+            <rect key="frame" x="0.0" y="0.0" width="204" height="247"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="204" height="248"/>
+                <rect key="frame" x="0.0" y="0.0" width="204" height="247"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UJ5-iL-xu0">
                         <rect key="frame" x="1" y="1" width="202" height="184"/>
@@ -43,7 +43,7 @@
                             <constraint firstAttribute="width" constant="150" id="np1-un-bZz"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
@@ -66,13 +66,6 @@
                             <action selector="arrowBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="NaB-8w-Z5V"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="首页-播放" translatesAutoresizingMaskIntoConstraints="NO" id="J31-6W-cmI">
-                        <rect key="frame" x="72" y="63" width="60" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="vak-pZ-ZKO"/>
-                            <constraint firstAttribute="height" constant="60" id="vpL-8x-z6h"/>
-                        </constraints>
-                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJh-rg-5SU">
                         <rect key="frame" x="0.0" y="213" width="204" height="32"/>
                         <subviews>
@@ -119,13 +112,10 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="J31-6W-cmI" firstAttribute="centerX" secondItem="UJ5-iL-xu0" secondAttribute="centerX" id="2GJ-PT-dD9"/>
                 <constraint firstItem="gKA-8l-tJo" firstAttribute="trailing" secondItem="UJ5-iL-xu0" secondAttribute="trailing" constant="-8" id="2S0-kI-pK9"/>
                 <constraint firstItem="mOK-hI-abi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="6cx-KQ-z9U"/>
                 <constraint firstItem="QJh-rg-5SU" firstAttribute="top" secondItem="mOK-hI-abi" secondAttribute="bottom" constant="8" id="7Zo-uU-uvM"/>
                 <constraint firstItem="hhl-vJ-iIq" firstAttribute="top" secondItem="UJ5-iL-xu0" secondAttribute="bottom" constant="8" id="GKS-dX-b8F"/>
-                <constraint firstItem="J31-6W-cmI" firstAttribute="centerY" secondItem="UJ5-iL-xu0" secondAttribute="centerY" id="IzS-5s-jTY"/>
-                <constraint firstItem="J31-6W-cmI" firstAttribute="trailing" secondItem="UJ5-iL-xu0" secondAttribute="trailing" id="K46-uC-4pW"/>
                 <constraint firstItem="QJh-rg-5SU" firstAttribute="top" secondItem="hhl-vJ-iIq" secondAttribute="bottom" id="M7A-xW-9O2"/>
                 <constraint firstItem="UJ5-iL-xu0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="1" id="UHq-Pn-lSb"/>
                 <constraint firstItem="hhl-vJ-iIq" firstAttribute="trailing" secondItem="UJ5-iL-xu0" secondAttribute="trailing" id="V46-N3-KvM"/>
@@ -135,16 +125,11 @@
                 <constraint firstItem="UJ5-iL-xu0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="n7d-u7-uwk"/>
                 <constraint firstAttribute="trailing" secondItem="UJ5-iL-xu0" secondAttribute="trailing" constant="1" id="tbB-gQ-GlI"/>
                 <constraint firstAttribute="trailing" secondItem="QJh-rg-5SU" secondAttribute="trailing" id="tn3-nE-TK8"/>
-                <constraint firstItem="J31-6W-cmI" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="wGe-ql-xWw"/>
-                <constraint firstItem="J31-6W-cmI" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ykc-uJ-fAK"/>
                 <constraint firstItem="gKA-8l-tJo" firstAttribute="bottom" secondItem="UJ5-iL-xu0" secondAttribute="bottom" constant="-8" id="zI5-pj-Czv"/>
             </constraints>
-            <size key="customSize" width="327" height="248"/>
+            <size key="customSize" width="327" height="247"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="K46-uC-4pW"/>
-                    <exclude reference="wGe-ql-xWw"/>
-                    <exclude reference="ykc-uJ-fAK"/>
                     <exclude reference="7Zo-uU-uvM"/>
                     <exclude reference="YtC-uZ-SlS"/>
                 </mask>
@@ -158,13 +143,12 @@
                 <outlet property="videoLengL" destination="gKA-8l-tJo" id="8qZ-G9-ZvK"/>
                 <outlet property="viewH" destination="M7A-xW-9O2" id="2Ww-ju-5yS"/>
             </connections>
-            <point key="canvasLocation" x="506" y="245"/>
+            <point key="canvasLocation" x="506" y="245.5"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="arrow_carrot_up_alt_72px_1143276_easyicon.net" width="20" height="20"/>
         <image name="eye_48px_557986_easyicon.net" width="20" height="20"/>
         <image name="mainCellComment" width="20" height="20"/>
-        <image name="首页-播放" width="60" height="60"/>
     </resources>
 </document>

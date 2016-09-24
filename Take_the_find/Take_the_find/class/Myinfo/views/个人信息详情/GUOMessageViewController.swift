@@ -68,6 +68,7 @@ class GUOMessageViewController: UIViewController,STPickerDateDelegate{
             nickB.setTitle(alertNick!, forState: .Normal)
         }
         if alertSignature != nil{
+            qianMingBtn.titleLabel?.numberOfLines = 0
             qianMingBtn.setTitle(alertSignature!, forState: .Normal)
         }
     }

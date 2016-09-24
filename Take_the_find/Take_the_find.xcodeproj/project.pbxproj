@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		373029C9B311D7737F60CBEB /* libPods-Take_the_find.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102ED9B08E56801316B3AADB /* libPods-Take_the_find.a */; };
+		BC2236CC1D96138C00D87BAA /* GUONextVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2236CB1D96138C00D87BAA /* GUONextVideoViewController.swift */; };
 		BC4EF3801D93AA0100748931 /* LoginAndResgiest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EF37F1D93AA0100748931 /* LoginAndResgiest.swift */; };
 		BC659B281D95218D00947E12 /* alertSex.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC659B191D95218D00947E12 /* alertSex.xib */; };
 		BC659B291D95218D00947E12 /* GUOalertSexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC659B1A1D95218D00947E12 /* GUOalertSexViewController.swift */; };
@@ -56,12 +57,16 @@
 		BC6A3AD71D929D1A00025A4C /* GUOVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC6A3AD51D929D1A00025A4C /* GUOVideoDetailCell.xib */; };
 		BC6A3AD91D92C15B00025A4C /* GUOHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6A3AD81D92C15B00025A4C /* GUOHeadView.swift */; };
 		BC6A3ADB1D92C16A00025A4C /* GUOHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC6A3ADA1D92C16A00025A4C /* GUOHeadView.xib */; };
+		BCD1BCD61D964A7D0020E146 /* GUOVideoHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCD1BCD51D964A7D0020E146 /* GUOVideoHead.xib */; };
+		BCD1BCE51D9679DE0020E146 /* WMPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BCD1BCE21D9679DE0020E146 /* WMPlayer.bundle */; };
+		BCD1BCE61D9679DE0020E146 /* WMPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD1BCE41D9679DE0020E146 /* WMPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		102ED9B08E56801316B3AADB /* libPods-Take_the_find.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Take_the_find.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C2353E39C584E82632A735A /* Pods-Take_the_find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Take_the_find.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Take_the_find/Pods-Take_the_find.debug.xcconfig"; sourceTree = "<group>"; };
 		7B742CEE365AC36F5C69F048 /* Pods-Take_the_find.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Take_the_find.release.xcconfig"; path = "Pods/Target Support Files/Pods-Take_the_find/Pods-Take_the_find.release.xcconfig"; sourceTree = "<group>"; };
+		BC2236CB1D96138C00D87BAA /* GUONextVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUONextVideoViewController.swift; sourceTree = "<group>"; };
 		BC4EF37F1D93AA0100748931 /* LoginAndResgiest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAndResgiest.swift; sourceTree = "<group>"; };
 		BC659B191D95218D00947E12 /* alertSex.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = alertSex.xib; sourceTree = "<group>"; };
 		BC659B1A1D95218D00947E12 /* GUOalertSexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOalertSexViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +126,10 @@
 		BC6A3ADA1D92C16A00025A4C /* GUOHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GUOHeadView.xib; sourceTree = "<group>"; };
 		BC8127331D912A58004051F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BC8127401D9157B0004051F8 /* MyBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBridge.h; sourceTree = "<group>"; };
+		BCD1BCD51D964A7D0020E146 /* GUOVideoHead.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GUOVideoHead.xib; sourceTree = "<group>"; };
+		BCD1BCE21D9679DE0020E146 /* WMPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WMPlayer.bundle; sourceTree = "<group>"; };
+		BCD1BCE31D9679DE0020E146 /* WMPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMPlayer.h; sourceTree = "<group>"; };
+		BCD1BCE41D9679DE0020E146 /* WMPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +164,7 @@
 		BC659B161D95209A00947E12 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				BCD1BCE11D9679DE0020E146 /* WMPlayer */,
 				BC659B411D95244700947E12 /* STConfig */,
 				BC659B3A1D95240500947E12 /* Date(日期) */,
 				BC659B361D9521BB00947E12 /* STPickerView */,
@@ -170,8 +180,7 @@
 				BC659B1F1D95218D00947E12 /* 登录注册 */,
 				BC659B241D95218D00947E12 /* 转场动画 */,
 			);
-			name = views;
-			path = Myinfo/views;
+			path = views;
 			sourceTree = "<group>";
 		};
 		BC659B181D95218D00947E12 /* 个人信息细节 */ = {
@@ -290,7 +299,6 @@
 				BC6A39E01D9270F700025A4C /* Joke */,
 				BC6A39E51D9270F700025A4C /* Main */,
 				BC6A39E81D9270F700025A4C /* Myinfo */,
-				BC659B171D95218D00947E12 /* views */,
 				BC6A39ED1D9270F700025A4C /* Picture */,
 				BC6A3A681D9270F700025A4C /* Videos */,
 			);
@@ -350,6 +358,7 @@
 		BC6A39E81D9270F700025A4C /* Myinfo */ = {
 			isa = PBXGroup;
 			children = (
+				BC659B171D95218D00947E12 /* views */,
 				BC6A39E91D9270F700025A4C /* Controller */,
 				BC6A39EB1D9270F700025A4C /* model */,
 			);
@@ -427,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				BC6A3A6A1D9270F700025A4C /* GUOVideosViewController.swift */,
+				BC2236CB1D96138C00D87BAA /* GUONextVideoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -447,8 +457,19 @@
 				BC6A3AD51D929D1A00025A4C /* GUOVideoDetailCell.xib */,
 				BC6A3AD81D92C15B00025A4C /* GUOHeadView.swift */,
 				BC6A3ADA1D92C16A00025A4C /* GUOHeadView.xib */,
+				BCD1BCD51D964A7D0020E146 /* GUOVideoHead.xib */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		BCD1BCE11D9679DE0020E146 /* WMPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				BCD1BCE21D9679DE0020E146 /* WMPlayer.bundle */,
+				BCD1BCE31D9679DE0020E146 /* WMPlayer.h */,
+				BCD1BCE41D9679DE0020E146 /* WMPlayer.m */,
+			);
+			path = WMPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -519,8 +540,10 @@
 				BC6A3AD71D929D1A00025A4C /* GUOVideoDetailCell.xib in Resources */,
 				BC659B511D9530C500947E12 /* alterPicview.xib in Resources */,
 				BC659B4D1D952BE900947E12 /* NickViewxib.xib in Resources */,
+				BCD1BCD61D964A7D0020E146 /* GUOVideoHead.xib in Resources */,
 				BC659B351D95219E00947E12 /* Mine.plist in Resources */,
 				BC669EB91D91217800892ED0 /* LaunchScreen.storyboard in Resources */,
+				BCD1BCE51D9679DE0020E146 /* WMPlayer.bundle in Resources */,
 				BC659B531D95418000947E12 /* alterPassword.xib in Resources */,
 				BC659B2C1D95218D00947E12 /* GUOMessageViewController.xib in Resources */,
 				BC659B4F1D952E5400947E12 /* SignatureView.xib in Resources */,
@@ -612,6 +635,8 @@
 				BC6A3A7A1D9270F700025A4C /* PictureCollectionCell.swift in Sources */,
 				BC6A3AD61D929D1A00025A4C /* GUOVideoDetailCell.swift in Sources */,
 				BC659B2B1D95218D00947E12 /* GUOMessageViewController.swift in Sources */,
+				BCD1BCE61D9679DE0020E146 /* WMPlayer.m in Sources */,
+				BC2236CC1D96138C00D87BAA /* GUONextVideoViewController.swift in Sources */,
 				BC659B3F1D95240500947E12 /* NSCalendar+ST.m in Sources */,
 				BC6A3A711D9270F700025A4C /* GUOTabBarViewController.swift in Sources */,
 				BC659B2A1D95218D00947E12 /* GUOmessageDetailViewController.swift in Sources */,

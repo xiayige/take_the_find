@@ -26,6 +26,10 @@ class GUOVideosViewController: GUOBaseViewController,SDCycleScrollViewDelegate,G
         super.viewDidLoad()
         loadData()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     func loadData(){
         VideoModel.requestgetRecommendVideoData { (bannarArray, cateArray, modelsArray, error) in
             if error == nil{
@@ -91,6 +95,12 @@ extension GUOVideosViewController:UITableViewDataSource,UITableViewDelegate{
         return 249
     }
     func cellClick(videoM: VideoModel?, userM: UserModel?, error: NSError?) {
-        print(videoM?.fname,userM?.info)
+        if error == nil{
+            let nextV = GUONextVideoViewController()
+            nextV.userM = userM
+            nextV.hidesBottomBarWhenPushed = true
+            nextV.videoM = videoM
+            self.navigationController?.pushViewController(nextV, animated: true)
+        }
     }
 }

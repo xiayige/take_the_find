@@ -7,9 +7,7 @@
 //
 
 import UIKit
-
 class GUOVideoDetailCell: UICollectionViewCell {
-
     @IBOutlet weak var viewH: NSLayoutConstraint!
     @IBOutlet weak var danmuBtn: UIButton!
     @IBOutlet weak var seeBtn: UIButton!
@@ -21,7 +19,6 @@ class GUOVideoDetailCell: UICollectionViewCell {
     var istrue = false
     override func awakeFromNib() {
         super.awakeFromNib()
-       
     }
     @IBAction func arrowBtnClick(sender: UIButton) {
         if istrue{
@@ -52,8 +49,10 @@ class GUOVideoDetailCell: UICollectionViewCell {
         imageV.sd_setImageWithURL(NSURL.init(string: str))
         let seeStr = "\(model.viewcounts)观看"
         seeBtn.setTitle(seeStr, forState: .Normal)
-        let danmuStr = "\(model.videodanmu)条弹幕"
-        danmuBtn.setTitle(danmuStr, forState: .Normal)
+        if model.videodanmu != nil{
+            let danmuStr = "\(model.videodanmu!)条弹幕"
+            danmuBtn.setTitle(danmuStr, forState: .Normal)
+        }
         videoLengL.text = model.videotime
         self.model = model
     }

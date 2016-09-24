@@ -43,7 +43,6 @@ class UserModel: NSObject {
     var iconStr:String?
     ///vip等级
     var ulevel:String!
-    ///性别
     static func modelWithDict(dict:[String:String])->UserModel{
         let user = UserModel()
         user.setValuesForKeysWithDictionary(dict)
@@ -225,7 +224,7 @@ extension UserModel{
             formData.appendPartWithFileData(imageData, name: "headimage", fileName: "1.png", mimeType: "image/png")
             }, progress: nil, success: { (task, data ) in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                let dic = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: .AllowFragments) as! NSDictionary
+                _ = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: .AllowFragments) as! NSDictionary
                 printData(data as! NSData)
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }) { (task, error) in
