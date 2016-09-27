@@ -142,5 +142,33 @@ extension DuanZModel{
             callBack(array: nil, error: error)
         }
     }
+    ///发送网络请求，获取评论信息
+    static func requestcommitData(modelID:NSNumber,page:Int,callBack:(array:[GUOCommitModel]?,error:NSError?)->Void){
+        let url = String.init(format: "http://m2.qiushibaike.com/article/%@/comments?page=%d&count=50&rqcnt=49&r=5732e7d01457095228054",modelID,page)
+        let manger = AFHTTPSessionManager()
+        manger.responseSerializer = AFHTTPResponseSerializer()
+        manger.GET(url, parameters: nil, progress: nil, success: { (task, data) in
+            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+            var dataArr = [GUOCommitModel]()
+            if let dicts = obj["items"] as? NSArray {
+                for dict in dicts {
+                    let model = GUOCommitModel()
+                    model.content = dict["content"] as! String
+                    model.id = dict["user"]!!["id"] as! NSNumber
+                    model.icon = dict["user"]!!["icon"] as? String
+                    model.login = dict["user"]!!["login"]  as? String
+                    dataArr.append(model)
+                }
+                callBack(array: dataArr, error: nil)
+            }else{
+                SVProgressHUD.showErrorWithStatus("请求失败")
+                return
+            }
+        }) { (task, error) in
+            SVProgressHUD.showErrorWithStatus("网络连接失败")
+            callBack(array: nil, error: error)
+        }
+    }
+
 
 }

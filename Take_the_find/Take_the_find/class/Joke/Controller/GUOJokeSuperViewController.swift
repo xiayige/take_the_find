@@ -15,6 +15,7 @@ class GUOJokeSuperViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setThetabView()
+        self.navigationItem.title = type
         if type == "段子"{
             addDTabHeadAndfotter()
         }else{
@@ -116,8 +117,12 @@ extension GUOJokeSuperViewController:UITableViewDelegate,UITableViewDataSource{
         return 200
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let model = dataArr[indexPath.row]
-        print(model.id)
+        let commit = GUOCommitViewController()
+        commit.model = model
+        commit.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(commit, animated: true)
     }
 }
 extension GUOJokeSuperViewController:GUODuanZiTableViewCellDelegate{

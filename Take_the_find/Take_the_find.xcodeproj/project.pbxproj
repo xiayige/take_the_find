@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		373029C9B311D7737F60CBEB /* libPods-Take_the_find.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 102ED9B08E56801316B3AADB /* libPods-Take_the_find.a */; };
+		BC18C9BC1D9AA01E002AE6E8 /* GUOCommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC18C9BA1D9AA01E002AE6E8 /* GUOCommitCell.swift */; };
+		BC18C9BD1D9AA01E002AE6E8 /* GUOCommitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC18C9BB1D9AA01E002AE6E8 /* GUOCommitCell.xib */; };
+		BC1A3E0D1D9A8971004258CF /* GUODZDetailview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1A3E0C1D9A8971004258CF /* GUODZDetailview.swift */; };
+		BC1A3E0F1D9A8981004258CF /* GUODZDetailview.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC1A3E0E1D9A8981004258CF /* GUODZDetailview.xib */; };
+		BC1A3E111D9A940C004258CF /* GUOCommitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1A3E101D9A940B004258CF /* GUOCommitViewController.swift */; };
+		BC1A3E131D9A9509004258CF /* GUOCommitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1A3E121D9A9509004258CF /* GUOCommitModel.swift */; };
 		BC2236CC1D96138C00D87BAA /* GUONextVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2236CB1D96138C00D87BAA /* GUONextVideoViewController.swift */; };
 		BC4EF3801D93AA0100748931 /* LoginAndResgiest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EF37F1D93AA0100748931 /* LoginAndResgiest.swift */; };
 		BC5CB0FB1D98B2FD00A57B17 /* CFDanmaku.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5CB0F61D98B2FD00A57B17 /* CFDanmaku.m */; };
@@ -75,6 +81,12 @@
 		102ED9B08E56801316B3AADB /* libPods-Take_the_find.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Take_the_find.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C2353E39C584E82632A735A /* Pods-Take_the_find.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Take_the_find.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Take_the_find/Pods-Take_the_find.debug.xcconfig"; sourceTree = "<group>"; };
 		7B742CEE365AC36F5C69F048 /* Pods-Take_the_find.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Take_the_find.release.xcconfig"; path = "Pods/Target Support Files/Pods-Take_the_find/Pods-Take_the_find.release.xcconfig"; sourceTree = "<group>"; };
+		BC18C9BA1D9AA01E002AE6E8 /* GUOCommitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOCommitCell.swift; sourceTree = "<group>"; };
+		BC18C9BB1D9AA01E002AE6E8 /* GUOCommitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GUOCommitCell.xib; sourceTree = "<group>"; };
+		BC1A3E0C1D9A8971004258CF /* GUODZDetailview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUODZDetailview.swift; sourceTree = "<group>"; };
+		BC1A3E0E1D9A8981004258CF /* GUODZDetailview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GUODZDetailview.xib; sourceTree = "<group>"; };
+		BC1A3E101D9A940B004258CF /* GUOCommitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOCommitViewController.swift; sourceTree = "<group>"; };
+		BC1A3E121D9A9509004258CF /* GUOCommitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUOCommitModel.swift; sourceTree = "<group>"; };
 		BC2236CB1D96138C00D87BAA /* GUONextVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUONextVideoViewController.swift; sourceTree = "<group>"; };
 		BC4EF37F1D93AA0100748931 /* LoginAndResgiest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAndResgiest.swift; sourceTree = "<group>"; };
 		BC5CB0F51D98B2FD00A57B17 /* CFDanmaku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFDanmaku.h; sourceTree = "<group>"; };
@@ -368,6 +380,7 @@
 				BC6A39E21D9270F700025A4C /* GUOJokeViewController.swift */,
 				BC5CB1071D991AEA00A57B17 /* GUODNextViewController.swift */,
 				BC5CB10D1D9947B900A57B17 /* GUOJokeSuperViewController.swift */,
+				BC1A3E101D9A940B004258CF /* GUOCommitViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -376,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				BC5CB1011D98F85900A57B17 /* DuanZModel.swift */,
+				BC1A3E121D9A9509004258CF /* GUOCommitModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -385,6 +399,10 @@
 			children = (
 				BC5CB1031D99077200A57B17 /* GUODuanZiTableViewCell.swift */,
 				BC5CB1041D99077200A57B17 /* GUODuanZiTableViewCell.xib */,
+				BC1A3E0C1D9A8971004258CF /* GUODZDetailview.swift */,
+				BC1A3E0E1D9A8981004258CF /* GUODZDetailview.xib */,
+				BC18C9BA1D9AA01E002AE6E8 /* GUOCommitCell.swift */,
+				BC18C9BB1D9AA01E002AE6E8 /* GUOCommitCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -579,8 +597,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC6A3ADB1D92C16A00025A4C /* GUOHeadView.xib in Resources */,
+				BC1A3E0F1D9A8981004258CF /* GUODZDetailview.xib in Resources */,
 				BC659B281D95218D00947E12 /* alertSex.xib in Resources */,
 				BC6A3AD71D929D1A00025A4C /* GUOVideoDetailCell.xib in Resources */,
+				BC18C9BD1D9AA01E002AE6E8 /* GUOCommitCell.xib in Resources */,
 				BC5CB1061D99077200A57B17 /* GUODuanZiTableViewCell.xib in Resources */,
 				BC659B511D9530C500947E12 /* alterPicview.xib in Resources */,
 				BC659B4D1D952BE900947E12 /* NickViewxib.xib in Resources */,
@@ -682,10 +702,12 @@
 				BC6A3AAF1D92714A00025A4C /* VideoModel.swift in Sources */,
 				BC5CB0FC1D98B2FD00A57B17 /* CFDanmakuInfo.m in Sources */,
 				BC5CB1081D991AEA00A57B17 /* GUODNextViewController.swift in Sources */,
+				BC1A3E0D1D9A8971004258CF /* GUODZDetailview.swift in Sources */,
 				BC6A3A7A1D9270F700025A4C /* PictureCollectionCell.swift in Sources */,
 				BC6A3AD61D929D1A00025A4C /* GUOVideoDetailCell.swift in Sources */,
 				BC659B2B1D95218D00947E12 /* GUOMessageViewController.swift in Sources */,
 				BCD1BCE61D9679DE0020E146 /* WMPlayer.m in Sources */,
+				BC18C9BC1D9AA01E002AE6E8 /* GUOCommitCell.swift in Sources */,
 				BC2236CC1D96138C00D87BAA /* GUONextVideoViewController.swift in Sources */,
 				BC659B3F1D95240500947E12 /* NSCalendar+ST.m in Sources */,
 				BC6A3A711D9270F700025A4C /* GUOTabBarViewController.swift in Sources */,
@@ -695,8 +717,10 @@
 				BC6A3A6F1D9270F700025A4C /* GUOJokeViewController.swift in Sources */,
 				BC6A3A721D9270F700025A4C /* GUOMyinfoViewController.swift in Sources */,
 				BC6A3A6E1D9270F700025A4C /* GUOBaseViewController.swift in Sources */,
+				BC1A3E131D9A9509004258CF /* GUOCommitModel.swift in Sources */,
 				BC6A3A761D9270F700025A4C /* PictureSearchViewController.swift in Sources */,
 				BC659B4A1D95244700947E12 /* STUI.m in Sources */,
+				BC1A3E111D9A940C004258CF /* GUOCommitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
