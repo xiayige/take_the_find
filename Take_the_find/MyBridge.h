@@ -15,6 +15,8 @@
 #import "SVProgressHUD.h"
 #import <Photos/Photos.h>
 #import "WMPlayer.h"
+#import "SJWaveView.h"
+#import "CFDanmakuView.h"
 #import "STPickerDate.h"
 #import "SDCycleScrollView.h"//轮播视图的头文件
 #endif /* MyBridge_h */

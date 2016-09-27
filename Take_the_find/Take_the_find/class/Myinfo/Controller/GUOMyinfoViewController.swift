@@ -7,26 +7,25 @@
 //
 
 import UIKit
-class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITableViewDataSource {
+class GUOMyinfoViewController: GUOBaseViewController {
     
     var headImage :UIImageView! = nil
     var nameL:UILabel! = nil
     var  nickL:UILabel! = nil
+    var headH:CGFloat = 240
+    var ishidden = true
     lazy var tableView:UITableView = {
         
         let table = UITableView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height), style: UITableViewStyle.Grouped)
         table.showsVerticalScrollIndicator = false
-        table.bounces = false
-        table.tableHeaderView = self.headerView
         table.delegate = self
+        
         table.dataSource = self
         return table
     }()
-    
+    //头部视图
     lazy var headerView:UIView = {
-        
-        let header = UIImageView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, 240))
-        
+        let header = UIImageView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, self.headH))
         header.image = UIImage.init(named: "beauty_consultant_showing_girl_256px_1081733_easyicon.net (1)")
         header.userInteractionEnabled = true
         let setBtn = UIButton.init(frame: CGRectMake(self.view.frame.size.width - 70, 35, 30, 30))
@@ -37,7 +36,6 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
         blackView.backgroundColor = UIColor.blackColor()
         blackView.alpha = 0.5
         header.addSubview(blackView)
-        
         let imageH:CGFloat = 70
         self.headImage = UIImageView.init(frame: CGRectMake(20, blackView.frame.origin.y - imageH/2, imageH, imageH))
         self.nameL = UILabel.init(frame: CGRectMake(20 + imageH + 20, blackView.frame.origin.y - imageH/2 + 30, 100, imageH))
@@ -59,9 +57,10 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
         self.nickL.font = UIFont.systemFontOfSize(12)
         self.nickL.text = "快去登录吧，发现更多精彩世界"
         header.addSubview(self.nickL)
+        
         return header
     }()
-    
+    //数据源
     lazy var dataArray: NSMutableArray = {
         let path = NSBundle.mainBundle().pathForResource("Mine", ofType: "plist")
         let array = NSMutableArray.init(contentsOfFile: path!)
@@ -69,11 +68,22 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(self.tableView)
-        tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0)
         self.tableView.tableHeaderView = self.headerView
+        tableView.bounces = false
         self.headImage.layer.cornerRadius = 35
         self.headImage.layer.masksToBounds = true
+        //添加监听头像通知
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.alertSucess(_:)), name: "alertIconsucess", object: nil)
+    }
+    ///头像上传成功
+    func alertSucess(noti:NSNotification){
+        let image = noti.object as! UIImage
+        headImage.image = image
+    }
+    deinit{
+         NSNotificationCenter.defaultCenter().removeObserver(self, name: "alertIconsucess", object: nil)
     }
     func headimageClick(tap:UITapGestureRecognizer){
         let login = GUOLoginViewController()
@@ -82,13 +92,13 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
         self.navigationController?.pushViewController(login, animated: true)
     }
     override func viewWillAppear(animated: Bool) {
-         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
         setTheHeadView()
     }
     override func viewWillDisappear(animated: Bool) {
+         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     ///判断用户状态
     func setTheHeadView(){
@@ -120,15 +130,22 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
             self.tableView.reloadData()
         }
     }
-    
+    ///点击登录
     func settingBtnClicked(button:UIButton)->Void
     {
         let loginVC = NewUserController.init()
         loginVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
-
-    // MARK: - UITableView协议方法
+    ///点击个人消息
+    func PersonMessage(){
+        let message = GUOMessageViewController()
+        message.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(message, animated: true)
+    }
+}
+// MARK: - UITableView协议方法
+extension GUOMyinfoViewController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return self.dataArray.count
@@ -207,10 +224,6 @@ class GUOMyinfoViewController: GUOBaseViewController,UITableViewDelegate,UITable
             PersonMessage()
         }
     }
-    func PersonMessage(){
-        let message = GUOMessageViewController()
-        message.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(message, animated: true)
-    }
+
 }
 

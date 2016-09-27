@@ -140,6 +140,5 @@ extension VideoModel{
             SVProgressHUD.showErrorWithStatus("获取弹幕请求失败")
            callBack(danmuArr: nil, error: error)
         }
-
     }
 }

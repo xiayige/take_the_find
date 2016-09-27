@@ -10,6 +10,9 @@ import UIKit
 class GUONextVideoViewController:UIViewController{
     @IBOutlet weak var playSuperV: UIView!
     var player:WMPlayer?
+    ///放置发送弹幕的父视图
+    ///弹幕条数
+     var i:Double = 0
     var danmV:UIView?
     var damuArr = [String]()
     var istrans = false
@@ -32,6 +35,18 @@ class GUONextVideoViewController:UIViewController{
     @IBOutlet weak var userNL: UILabel!
     var videoM:VideoModel?
     var userM:UserModel?
+    ///弹幕视图
+    lazy var danMuView:CFDanmakuView? = {
+        let danmuV = CFDanmakuView()
+        danmuV.frame = self.player!.bounds
+        danmuV.duration = 6.5
+        danmuV.centerDuration = 2.5
+        danmuV.lineHeight = 25
+        danmuV.maxShowLineCount = 15
+        danmuV.delegate = self
+        danmuV.maxCenterLineCount = 5
+        return danmuV
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
          setThecontent()
@@ -119,22 +134,13 @@ class GUONextVideoViewController:UIViewController{
         btn2.addTarget(self, action: #selector(self.FSDBtnClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         btn2.frame = CGRectMake(width,0 , width, 44)
         btn2.backgroundColor = backColor
-        btn1.tag = 101
+        btn2.tag = 101
         danmV?.addSubview(btn2)
         danmV?.addSubview(btn1)
         danmV!.backgroundColor = backColor
         self.view.addSubview(danmV!)
     }
-    ///发送弹幕
-    func FSDBtnClick(btn:UIButton){
-        if btn.tag == 100{
-            //点击发送弹幕
-            print("点击发送弹幕")
-        }else{
-            //点击关闭弹幕
-             print("点击关闭弹幕")
-        }
-    }
+    
     ///点击收藏
     @IBAction func SCBtnClick(sender: AnyObject) {
          print("点击收藏")
@@ -146,15 +152,21 @@ class GUONextVideoViewController:UIViewController{
     
     @IBAction func popBtn(sender: AnyObject) {
         if player != nil{
-            if player?.state != .StateFailed {
-                player?.pause()
-            }
-            player?.removeFromSuperview()
+            releasePlay()
             danmV?.removeFromSuperview()
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
+    ///移除播放器
+    func releasePlay(){
+        player?.currentItem.cancelPendingSeeks()
+        player?.currentItem.asset.cancelLoading()
+        if player!.isPlaying{
+            player?.pause()
+        }
+        player?.removeFromSuperview()
+        player?.layer.removeFromSuperlayer()
+    }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -167,6 +179,7 @@ class GUONextVideoViewController:UIViewController{
 }
 ///wmplaer的协议方法
 extension GUONextVideoViewController:WMPlayerDelegate{
+    ///双击屏幕
     func wmplayer(wmplayer: WMPlayer!, doubleTaped doubleTap: UITapGestureRecognizer!) {
         if !istrans{
             UIView.animateWithDuration(1.0) {
@@ -192,12 +205,12 @@ extension GUONextVideoViewController:WMPlayerDelegate{
         }
        istrans = !istrans
     }
+    ///点击关闭按钮
     func wmplayer(wmplayer: WMPlayer!, clickedCloseButton closeBtn: UIButton!) {
-        if player?.state != .StateFailed{
-           player?.pause()
-        }
-        player?.removeFromSuperview()
+        if player != nil{
+        releasePlay()
         danmV?.removeFromSuperview()
+        }
     }
     func wmplayer(wmplayer: WMPlayer!, clickedFullScreenButton fullScreenBtn: UIButton!) {
         if player != nil{
@@ -226,8 +239,8 @@ extension GUONextVideoViewController:WMPlayerDelegate{
         }
     }
     func wmplayerFailedPlay(wmplayer: WMPlayer!, WMPlayerStatus state: WMPlayerState) {
-        if state == .StateFailed{
-            player?.removeFromSuperview()
+        if player != nil{
+            releasePlay()
             danmV?.removeFromSuperview()
         }
     }
@@ -235,14 +248,70 @@ extension GUONextVideoViewController:WMPlayerDelegate{
         //将要播放
         if state == .StatusReadyToPlay{
             if damuArr.count != 0{
-                print("添加弹幕")
                 addDanMu()
+                print("添加弹幕")
             }
-            
         }
     }
+}
+extension GUONextVideoViewController:CFDanmakuDelegate{
     ///添加弹幕
     func addDanMu(){
+        addDanmuData()
+        player?.addSubview(danMuView!)
+        danMuView?.start()
     }
-    
+    ///添加弹幕数据
+    func addDanmuData(){
+        let array = NSMutableArray()
+       
+        for str in damuArr{
+            let danMudata = CFDanmaku()
+            let attrStr = NSMutableAttributedString.init(string: str, attributes: [NSFontAttributeName:UIFont.boldSystemFontOfSize(15),NSForegroundColorAttributeName:getranDomColor()])
+            danMudata.contentStr = attrStr
+            danMudata.timePoint = player!.currentTime() + 0.8*i
+            array.addObject(danMudata)
+            i += 1
+        }
+        danMuView?.prepareDanmakus(array as [AnyObject])
+    }
+    ///添加随机色
+    func getranDomColor()->UIColor{
+        let r = CGFloat(Double(arc4random_uniform(256))/255.0)
+        let g = CGFloat(Double(arc4random_uniform(256))/255.0)
+        let b = CGFloat(Double(arc4random_uniform(256))/255.0)
+        let color = UIColor.init(red: r, green: g, blue: b, alpha: 1.0)
+        return color
+    }
+    func danmakuViewIsBuffering(danmakuView: CFDanmakuView!) -> Bool {
+        return false
+    }
+    func danmakuViewGetPlayTime(danmakuView: CFDanmakuView!) -> NSTimeInterval {
+        let curritem = player?.currentTime()
+        let anyItem = CMTimeGetSeconds((player?.currentItem.duration)!)
+        let value = curritem! / Double(anyItem)
+        if value == 1{
+            danMuView?.stop()
+        }
+        return value * 50
+    }
+    func addOneDanMu(str:String){
+        let danMudata = CFDanmaku()
+        let attrStr = NSMutableAttributedString.init(string: str, attributes: [NSFontAttributeName:UIFont.boldSystemFontOfSize(15),NSForegroundColorAttributeName:getranDomColor()])
+        danMudata.contentStr = attrStr
+        danMudata.timePoint = player!.currentTime() + 0.8 * i
+        i += 1
+        danMuView?.sendDanmakuSource(danMudata)
+    }
+    ///发送弹幕
+    func FSDBtnClick(btn:UIButton){
+        if btn.tag == 100{
+            //点击发送弹幕
+            addOneDanMu("-我是弹幕-我是弹幕-我是弹幕-我是弹幕")
+        }else{
+            //点击关闭弹幕
+            danMuView?.hidden = btn.selected
+            btn.selected = !btn.selected
+        }
+    }
 }

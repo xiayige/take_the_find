@@ -23,9 +23,11 @@ class GUOLoginViewController: UIViewController {
         }else{
             UserModel.checkRequestData(nameL.text!, password: passWL.text!, callBack: { (dict, error) in
                 if error == nil{
+                    //清空单例
+                    self.deleTheUserModel()
                     //登录成功
                     SVProgressHUD.showSuccessWithStatus("登录成功")
-                    userDict = dict as! [String:String]
+                    self.addUserModelShare(dict as! [String:String])
                     isLogin = true
                     self.navigationController?.popViewControllerAnimated(true)
                 }else{
@@ -38,5 +40,30 @@ class GUOLoginViewController: UIViewController {
     @IBAction func PopBtnClick(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
-
+    ///清空单例
+    func deleTheUserModel(){
+        UserModel.shareUser.email = ""
+        UserModel.shareUser.id = ""
+        UserModel.shareUser.address = ""
+        UserModel.shareUser.sex = ""
+        UserModel.shareUser.birth = ""
+        UserModel.shareUser.uname = ""
+         UserModel.shareUser.iconStr = ""
+         UserModel.shareUser.headpic = ""
+         UserModel.shareUser.info = ""
+        UserModel.shareUser.ulevel = ""
+    }
+     ///为单例赋值
+    func addUserModelShare(dict:[String:String]){
+        UserModel.shareUser.email = dict["email"]
+        UserModel.shareUser.id = dict["id"]
+        UserModel.shareUser.address = dict["address"]
+        UserModel.shareUser.sex = dict["sex"]
+        UserModel.shareUser.birth = dict["birth"]
+        UserModel.shareUser.uname = dict["uname"]
+        UserModel.shareUser.iconStr = dict["iconStr"]
+        UserModel.shareUser.headpic = dict["headpic"]
+        UserModel.shareUser.info = dict["info"]
+        UserModel.shareUser.ulevel = dict["ulevel"]
+    }
 }

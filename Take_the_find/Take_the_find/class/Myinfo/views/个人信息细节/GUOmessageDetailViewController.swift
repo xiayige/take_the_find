@@ -113,6 +113,7 @@ class GUOmessageDetailViewController: UIViewController,UIImagePickerControllerDe
         if isLogin{
             if iconM != nil{
                 UserModel.alertpicRequest(iconM!, userID: UserModel.shareUser.id, pic: "headimage")
+                NSNotificationCenter.defaultCenter().postNotificationName("alertIconsucess", object: iconM)
             }
         }else{
             SVProgressHUD.showSuccessWithStatus("骚年还是去登录吧")

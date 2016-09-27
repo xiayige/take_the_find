@@ -8,8 +8,13 @@
 
 import Foundation
 var isLogin = false
-var userDict:[String:String] = (NSDictionary() as? [String : String])!
 class UserModel: NSObject {
+    class var shareUser : UserModel {
+            struct Static {
+                static let instance : UserModel = UserModel()
+            }
+            return Static.instance
+    }
     ///邮箱
     var email:String?
     ///用户ID
@@ -18,18 +23,7 @@ class UserModel: NSObject {
     var address:String! = ""
     var sex:String?
     var birth:String?
-    class var shareUser : UserModel {
-        get {
-            struct Static {
-                static let instance : UserModel = UserModel.modelWithDict(userDict)
-            }
-            return Static.instance
-        }set{
-            self.shareUser = newValue
-        }
-       
-    }
-    var uname:String?
+        var uname:String?
     /// 用户介绍
     var info:String?
     ///待拼接的头像
@@ -44,9 +38,9 @@ class UserModel: NSObject {
     ///vip等级
     var ulevel:String!
     static func modelWithDict(dict:[String:String])->UserModel{
-        let user = UserModel()
-        user.setValuesForKeysWithDictionary(dict)
-        return user
+        let model = UserModel()
+        model.setValuesForKeysWithDictionary(dict)
+        return model
     }
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {
         
@@ -216,16 +210,21 @@ extension UserModel{
     static func alertpicRequest(image:UIImage!,userID:String!,pic:String!){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/alterPic"
-        let para = ["userid":userID,"pic":pic]
+        let para = ["userid":userID]
         let manager = AFHTTPSessionManager()
+        let imageData = UIImagePNGRepresentation(image)!
         manager.responseSerializer = AFHTTPResponseSerializer()
         manager.POST(url, parameters: para, constructingBodyWithBlock: { (formData) in
-            let imageData = UIImagePNGRepresentation(image)!
-            formData.appendPartWithFileData(imageData, name: "headimage", fileName: "1.png", mimeType: "image/png")
+            formData.appendPartWithFileData(imageData, name: "pic", fileName: "userPhoto", mimeType: "image/jpeg")
             }, progress: nil, success: { (task, data ) in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                _ = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: .AllowFragments) as! NSDictionary
-                printData(data as! NSData)
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: .AllowFragments) as! NSDictionary
+                print(obj)
+                if obj["successed"] != nil{
+                    SVProgressHUD.showErrorWithStatus("上传成功")
+                }else{
+                    SVProgressHUD.showErrorWithStatus("上传失败")
+                }
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }) { (task, error) in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
