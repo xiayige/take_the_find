@@ -207,21 +207,21 @@ extension UserModel{
         }
     }
     ///上传头像
-    static func alertpicRequest(image:UIImage!,userID:String!,pic:String!){
+    static func alertpicRequest(image:UIImage!,userID:String!,callBack:(picstr:String?,error:NSError?)->()){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/alterPic"
         let para = ["userid":userID]
         let manager = AFHTTPSessionManager()
-        let imageData = UIImagePNGRepresentation(image)!
+        let imageData = UIImageJPEGRepresentation(image, 1)
         manager.responseSerializer = AFHTTPResponseSerializer()
         manager.POST(url, parameters: para, constructingBodyWithBlock: { (formData) in
-            formData.appendPartWithFileData(imageData, name: "pic", fileName: "userPhoto", mimeType: "image/jpeg")
+            formData.appendPartWithFileData(imageData!, name: "pic", fileName: "userPhoto", mimeType: "image/jpeg")
             }, progress: nil, success: { (task, data ) in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: .AllowFragments) as! NSDictionary
-                print(obj)
                 if obj["successed"] != nil{
-                    SVProgressHUD.showErrorWithStatus("上传成功")
+                    SVProgressHUD.showSuccessWithStatus("上传成功")
+                    callBack(picstr: (obj["pic"] as! String), error: nil)
                 }else{
                     SVProgressHUD.showErrorWithStatus("上传失败")
                 }
@@ -229,6 +229,7 @@ extension UserModel{
         }) { (task, error) in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             print("上传头像时网络错误")
+            callBack(picstr: nil, error: error)
         }
 
     }

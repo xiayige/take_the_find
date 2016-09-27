@@ -24,18 +24,11 @@ class GUOMessageViewController: UIViewController,STPickerDateDelegate{
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tuichuBtnClick))
             return tap
             }())
-        //添加监听头像通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.alertSucess(_:)), name: "alertIconsucess", object: nil)
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setTheUserModel()
         setTheAlert()
-    }
-    ///头像上传成功
-    func alertSucess(noti:NSNotification){
-        let image = noti.object as! UIImage
-        iconB.setImage(image, forState: .Normal)
     }
     func setTheUserModel(){
         if isLogin {
@@ -87,17 +80,14 @@ class GUOMessageViewController: UIViewController,STPickerDateDelegate{
          //单例清空
         isLogin = false
         SVProgressHUD.showSuccessWithStatus("退出登录成功")
+        self.navigationController?.popViewControllerAnimated(true)
     }
     ///头像
     @IBAction func iconBtn(sender: AnyObject) {
-        print("点击头像")
         let message = GUOmessageDetailViewController()
         message.hidesBottomBarWhenPushed = true
         message.str = "头像"
         self.navigationController?.pushViewController(message, animated: true)
-    }
-    deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "alertIconsucess", object: nil)
     }
     ///昵称
     @IBAction func nickBtn(sender: AnyObject) {

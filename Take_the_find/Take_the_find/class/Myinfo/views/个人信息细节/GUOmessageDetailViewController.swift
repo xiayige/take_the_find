@@ -42,6 +42,9 @@ class GUOmessageDetailViewController: UIViewController,UIImagePickerControllerDe
             view = NSBundle.mainBundle().loadNibNamed("alterPassword", owner: self, options: nil).last as! UIView
         }
     }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
      ///修改个性签名
     @IBAction func SignatureBtn(sender: AnyObject) {
         //修改个性签名
@@ -112,8 +115,12 @@ class GUOmessageDetailViewController: UIViewController,UIImagePickerControllerDe
     @IBAction func commitPBtn(sender: AnyObject) {
         if isLogin{
             if iconM != nil{
-                UserModel.alertpicRequest(iconM!, userID: UserModel.shareUser.id, pic: "headimage")
-                NSNotificationCenter.defaultCenter().postNotificationName("alertIconsucess", object: iconM)
+                UserModel.alertpicRequest(iconM, userID: UserModel.shareUser.id, callBack: { (picstr, error) in
+                    if error == nil{
+                        UserModel.shareUser.iconStr = "http://www.cat666.com" + picstr!
+                     }
+                })
+                
             }
         }else{
             SVProgressHUD.showSuccessWithStatus("骚年还是去登录吧")

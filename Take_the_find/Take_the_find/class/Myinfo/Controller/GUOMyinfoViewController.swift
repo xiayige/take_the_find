@@ -19,7 +19,6 @@ class GUOMyinfoViewController: GUOBaseViewController {
         let table = UITableView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height), style: UITableViewStyle.Grouped)
         table.showsVerticalScrollIndicator = false
         table.delegate = self
-        
         table.dataSource = self
         return table
     }()
@@ -28,8 +27,9 @@ class GUOMyinfoViewController: GUOBaseViewController {
         let header = UIImageView.init(frame: CGRectMake(0, 0, self.view.frame.size.width, self.headH))
         header.image = UIImage.init(named: "beauty_consultant_showing_girl_256px_1081733_easyicon.net (1)")
         header.userInteractionEnabled = true
-        let setBtn = UIButton.init(frame: CGRectMake(self.view.frame.size.width - 70, 35, 30, 30))
-        setBtn.setImage(UIImage.init(named: "configure"), forState: UIControlState.Normal)
+        let setBtn = UIButton.init(frame: CGRectMake(self.view.frame.size.width - 70, 35, 80, 30))
+        setBtn.setTitle("注册", forState:.Normal)
+        setBtn.setTitleColor(UIColor.orangeColor(), forState: .Normal)
         setBtn.addTarget(self, action: #selector(self.settingBtnClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         header.addSubview(setBtn)
         let blackView = UIView.init(frame: CGRectMake(0, header.frame.size.height - 100, header.frame.size.width, 100))
@@ -74,17 +74,11 @@ class GUOMyinfoViewController: GUOBaseViewController {
         tableView.bounces = false
         self.headImage.layer.cornerRadius = 35
         self.headImage.layer.masksToBounds = true
-        //添加监听头像通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.alertSucess(_:)), name: "alertIconsucess", object: nil)
+        
+        
     }
-    ///头像上传成功
-    func alertSucess(noti:NSNotification){
-        let image = noti.object as! UIImage
-        headImage.image = image
-    }
-    deinit{
-         NSNotificationCenter.defaultCenter().removeObserver(self, name: "alertIconsucess", object: nil)
-    }
+    
+    
     func headimageClick(tap:UITapGestureRecognizer){
         let login = GUOLoginViewController()
         self.navigationItem.hidesBackButton = true

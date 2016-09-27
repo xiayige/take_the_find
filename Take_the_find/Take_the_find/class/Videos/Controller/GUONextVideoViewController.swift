@@ -151,21 +151,21 @@ class GUONextVideoViewController:UIViewController{
     }
     
     @IBAction func popBtn(sender: AnyObject) {
-        if player != nil{
-            releasePlay()
-            danmV?.removeFromSuperview()
-        }
         self.navigationController?.popViewControllerAnimated(true)
     }
     ///移除播放器
     func releasePlay(){
-        player?.currentItem.cancelPendingSeeks()
-        player?.currentItem.asset.cancelLoading()
-        if player!.isPlaying{
-            player?.pause()
-        }
+        player?.pause()
         player?.removeFromSuperview()
-        player?.layer.removeFromSuperlayer()
+        player?.playerLayer.removeFromSuperlayer()
+        player?.player.replaceCurrentItemWithPlayerItem(nil)
+        player?.currentItem = nil
+        player?.player = nil
+        //player?.autoDismissTimer.invalidate()
+        player?.autoDismissTimer = nil
+        player?.playOrPauseBtn = nil
+        player?.playerLayer = nil
+        player = nil
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -175,6 +175,10 @@ class GUONextVideoViewController:UIViewController{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    deinit{
+        self.releasePlay()
+        danmV?.removeFromSuperview()
     }
 }
 ///wmplaer的协议方法
@@ -212,6 +216,7 @@ extension GUONextVideoViewController:WMPlayerDelegate{
         danmV?.removeFromSuperview()
         }
     }
+    
     func wmplayer(wmplayer: WMPlayer!, clickedFullScreenButton fullScreenBtn: UIButton!) {
         if player != nil{
             if !istrans{
@@ -249,7 +254,6 @@ extension GUONextVideoViewController:WMPlayerDelegate{
         if state == .StatusReadyToPlay{
             if damuArr.count != 0{
                 addDanMu()
-                print("添加弹幕")
             }
         }
     }
@@ -288,6 +292,9 @@ extension GUONextVideoViewController:CFDanmakuDelegate{
     }
     func danmakuViewGetPlayTime(danmakuView: CFDanmakuView!) -> NSTimeInterval {
         let curritem = player?.currentTime()
+        guard (player?.currentItem.duration) != nil else{
+            return  20
+        }
         let anyItem = CMTimeGetSeconds((player?.currentItem.duration)!)
         let value = curritem! / Double(anyItem)
         if value == 1{
