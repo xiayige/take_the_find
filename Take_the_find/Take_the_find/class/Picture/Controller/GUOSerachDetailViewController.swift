@@ -145,8 +145,7 @@ extension GUOSerachDetailViewController: UISearchBarDelegate{
             //加载数据
             loadDetailData(keyword!)
         }else{
-            SVProgressHUD.showWithStatus("请求参数不正确")
-            SVProgressHUD.dismissWithDelay(1.0)
+            SVProgressHUD.showErrorWithStatus("请求不能为空")
         }
         
     }
@@ -166,7 +165,7 @@ extension GUOSerachDetailViewController: UISearchBarDelegate{
                     weakSelf!.collectionV.mj_header.endRefreshing()
                     weakSelf!.collectionV.mj_footer.endRefreshing()
                 }else{
-                    print("请求错误")
+                    SVProgressHUD.showErrorWithStatus("网络错误")
                 }
             }
         })
@@ -184,7 +183,7 @@ extension GUOSerachDetailViewController: UISearchBarDelegate{
                     weakSelf!.collectionV.mj_footer.endRefreshing()
                     SVProgressHUD.dismiss()
                 }else{
-                     print("请求错误")
+                    SVProgressHUD.showErrorWithStatus("网络错误")
                 }
             }
         })

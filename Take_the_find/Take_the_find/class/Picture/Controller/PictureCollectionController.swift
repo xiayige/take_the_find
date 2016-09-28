@@ -11,6 +11,7 @@ class PictureCollectionController: UICollectionViewController,UICollectionViewDe
     var type:String!
     var dataArr = [PictureModel]()
     var block:(([String])->Void)?
+    var cateArr = [String]()
     var page = 1
     var layout:UICollectionViewFlowLayout!
     //MARK:加载控制器
@@ -58,6 +59,7 @@ class PictureCollectionController: UICollectionViewController,UICollectionViewDe
                     SVProgressHUD.dismiss()
                 }else{
                     print(error)
+                    SVProgressHUD.dismiss()
                 }
             }
         })
@@ -76,13 +78,14 @@ class PictureCollectionController: UICollectionViewController,UICollectionViewDe
                     SVProgressHUD.dismiss()
                 }else{
                     print(error)
+                    SVProgressHUD.dismiss()
                 }
             }
         })
         self.collectionView?.mj_header.beginRefreshing()
     }
     func makeThehostData(models:[PictureModel]){
-        var cateArr = [String]()
+        cateArr = [String]()
         for model in models{
             let str = model.objTag
             if str == nil{

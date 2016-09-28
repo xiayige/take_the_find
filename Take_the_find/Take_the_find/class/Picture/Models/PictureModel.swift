@@ -43,8 +43,10 @@ extension PictureModel{
                 let model = PictureModel.modelWithDict(dict)
                 dataArr.append(model)
             }
+            
             callBack(array: dataArr, error: nil)
         }) { (task, error) in
+            SVProgressHUD.showErrorWithStatus("请求失败")
             callBack(array: nil, error: error)
         }
     }
@@ -63,6 +65,7 @@ extension PictureModel{
             }
             callBack(array: dataArr, error: nil)
         }) { (task, error) in
+            SVProgressHUD.showErrorWithStatus("请求失败")
             callBack(array: nil, error: error)
         }
     }

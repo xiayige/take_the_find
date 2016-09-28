@@ -54,7 +54,7 @@ class GUODuanZiTableViewCell: UITableViewCell {
             }
             pictureImage.sd_setImageWithURL(NSURL.init(string: model.iconStr!))
         }else{
-            picImageH.constant = 0.001
+            picImageH.constant = 0
         }
         model.cellH = topViewH.constant + picImageH.constant
     }

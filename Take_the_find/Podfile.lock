@@ -24,7 +24,7 @@ PODS:
   - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.0)
+  - AFNetworking (~> 3.1.0)
   - Masonry
   - MJRefresh
   - SDCycleScrollView (~> 1.64)
@@ -39,6 +39,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-PODFILE CHECKSUM: e64fd17d5781825aa91caacf826b3233a462e0b1
+PODFILE CHECKSUM: 7d4a881b0a02b9648035c1c794922d95941f0318
 
 COCOAPODS: 1.0.1

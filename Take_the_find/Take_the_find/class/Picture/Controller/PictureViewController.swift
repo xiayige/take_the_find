@@ -42,7 +42,10 @@ class PictureViewController: GUOBaseViewController {
     func PicturerightBtnClick() {
         let searchBarVC = PictureSearchViewController()
         searchBarVC.type = btnArr[selectefIndex]
-        searchBarVC.hotSeatchArray = cateArray
+        let childVC = self.childViewControllers[selectefIndex] as! PictureCollectionController
+        if childVC.cateArr.count != 0{
+            searchBarVC.hotSeatchArray = childVC.cateArr
+        }
         searchBarVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchBarVC, animated: true)
     }

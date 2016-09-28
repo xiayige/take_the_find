@@ -12,19 +12,27 @@ class GUOCommitViewController: UITableViewController {
     var model:DuanZModel!
     var page = 1
     var dataArr = [GUOCommitModel]()
+    var height:CGFloat = 10
     var headVH:CGFloat!
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTheHeadV()
+        self.tableView.estimatedRowHeight = 120
+        self.tableView.registerNib(UINib.init(nibName: "GUOCommitCell", bundle: nil), forCellReuseIdentifier: "GUOCommitCell")
         loadTheCommit()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        loadTheHeadV()
+    }
     func loadTheHeadV(){
-        let headV = GUODZDetailview.setThecell(model)
-        self.tableView.tableHeaderView = headV
-        self.tableView.registerNib(UINib.init(nibName: "GUOCommitCell", bundle: nil), forCellReuseIdentifier: "GUOCommitCell")
+        GUODZDetailview.setThecell(model) { (headV, height) in
+            headV.frame = CGRectMake(0, 20, SCREEN_W, height + 30)
+            self.tableView.tableHeaderView = headV
+            self.tableView.reloadData()
+        }
+        
     }
     func loadTheCommit(){
-        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { 
             DuanZModel.requestcommitData(self.model.id, page: 1, callBack: { (array, error) in
                 if error == nil{
                     self.dataArr.removeAll()
@@ -33,10 +41,8 @@ class GUOCommitViewController: UITableViewController {
                     self.tableView.reloadData()
                     self.page += 1
                 }
-                self.tableView.mj_header.endRefreshing()
                 self.tableView.mj_footer.endRefreshing()
             })
-        })
         self.tableView.mj_footer = MJRefreshBackGifFooter(refreshingBlock: { 
             DuanZModel.requestcommitData(self.model.id, page: self.page, callBack: { (array, error) in
                 if error == nil{
@@ -45,12 +51,10 @@ class GUOCommitViewController: UITableViewController {
                     self.tableView.reloadData()
                     self.page += 1
                 }
-                self.tableView.mj_header.endRefreshing()
                 self.tableView.mj_footer.endRefreshing()
             })
 
         })
-        self.tableView.mj_header.beginRefreshing()
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArr.count
@@ -63,8 +67,5 @@ class GUOCommitViewController: UITableViewController {
             cell.setTheCell(model, Index: indexPath.row + 1)
             return cell
         
-    }
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 120
     }
 }

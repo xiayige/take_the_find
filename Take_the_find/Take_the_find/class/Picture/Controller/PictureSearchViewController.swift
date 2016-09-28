@@ -78,7 +78,7 @@ extension PictureSearchViewController: UISearchBarDelegate{
         if keyword != ""{
             loadDetailData(keyword!, type: nil)
         }else{
-            SVProgressHUD.showWithStatus("请求参数不正确")
+            SVProgressHUD.showWithStatus("输入条件不足")
             SVProgressHUD.dismissWithDelay(1.0)
         }
     }
