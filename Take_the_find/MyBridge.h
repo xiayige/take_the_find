@@ -19,5 +19,8 @@
 #import "CFDanmakuView.h"
 #import "STPickerDate.h"
 #import "FMDB.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 #import "SDCycleScrollView.h"//轮播视图的头文件
 #endif /* MyBridge_h */

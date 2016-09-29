@@ -66,4 +66,24 @@ class GUOLoginViewController: UIViewController {
         UserModel.shareUser.info = dict["info"]
         UserModel.shareUser.ulevel = dict["ulevel"]
     }
+    //点击微信登录
+    @IBAction func btnWechatClick(sender: AnyObject) {
+        //获取微信平台
+        let platfrom = UMSocialSnsPlatformManager.getSocialPlatformWithName(UMShareToWechatSession)
+        //发起登录
+        platfrom.loginClickHandler(self,UMSocialControllerService.defaultControllerService(),true,{response in
+            if response.responseCode == UMSResponseCodeSuccess{
+                print("微信登录成功")
+                let userAccout = UMSocialAccountManager.socialAccountDictionary() as NSDictionary
+                print(userAccout)
+                let user = userAccout.valueForKey(platfrom.platformName)
+                print("用户名:",user?.userName,"用户ID:",user!.usid,"用户头像:",user!.iconURL,"用户Token:",user?.accessToken)
+            }else if response.responseCode == UMSResponseCodeCancel{
+                print("微信登录取消")
+            }else if response.responseCode == UMSResponseCodeFaild{
+                print("微信登录失败")
+                
+            }
+        })
+    }
 }

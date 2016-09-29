@@ -18,9 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = GUOTabBarViewController()
         window?.makeKeyAndVisible()
+        //设置友盟AppKey
+        UMSocialData.setAppKey(AppKey)
+        //分享平台设置
+        //设置微信平台
+        UMSocialWechatHandler.setWXAppId(wechatAppID, appSecret: wechatAppSecret, url: "http://www.baidu.com")
         return true
     }
-
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        // true 能够成功进入App， 否则不允许打开
+        UMSocialSnsService.handleOpenURL(url)// 回调相应的分享协议方法
+        
+        //可以针对url进程处理
+        
+        return true
+    }
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

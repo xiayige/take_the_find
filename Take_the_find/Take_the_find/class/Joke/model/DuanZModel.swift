@@ -143,71 +143,31 @@ extension DuanZModel{
         }
     }
     ///发送网络请求，获取评论信息
-    static func requestcommitData(type:String,modelID:NSNumber,page:Int,callBack:(array:[GUOCommitModel]?,error:NSError?)->Void){
-        if page != 1{
-            if let dicts = readTheDict(type, page: page){
-              detailDZDataWithDict(false,dicts:dicts, callBack: { (dataArr) in
-                 callBack(array: dataArr, error: nil)
-                 return
-              })
-            }
-        }
+    static func requestcommitData(modelID:NSNumber,page:Int,callBack:(array:[GUOCommitModel]?,error:NSError?)->Void){
         let url = String.init(format: "http://m2.qiushibaike.com/article/%@/comments?page=%d&count=50&rqcnt=49&r=5732e7d01457095228054",modelID,page)
-        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: nil) { (data, error) in
-            if error == nil{
-                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-                if let dicts = obj["items"] as? NSArray {
-                    detailDZDataWithDict(true,dicts:dicts, callBack: { (dataArr) in
-                        callBack(array: dataArr, error: nil)
-                    })
+        let manger = AFHTTPSessionManager()
+        manger.responseSerializer = AFHTTPResponseSerializer()
+        manger.GET(url, parameters: nil, progress: nil, success: { (task, data) in
+            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+            var dataArr = [GUOCommitModel]()
+            if let dicts = obj["items"] as? NSArray {
+                for dict in dicts {
+                    let model = GUOCommitModel()
+                    model.content = dict["content"] as! String
+                    model.id = dict["user"]!!["id"] as! NSNumber
+                    model.icon = dict["user"]!!["icon"] as? String
+                    model.login = dict["user"]!!["login"]  as? String
+                    dataArr.append(model)
                 }
+                callBack(array: dataArr, error: nil)
             }else{
-                    callBack(array: nil, error: error)
+                SVProgressHUD.showErrorWithStatus("请求失败")
+                return
             }
+        }) { (task, error) in
+            SVProgressHUD.showErrorWithStatus("网络连接失败")
+            callBack(array: nil, error: error)
         }
-    
-    }
-    //对数据的处理
-    static func detailDZDataWithDict(istrue:Bool,dicts:NSArray,callBack:([GUOCommitModel],ID:String,page:Int,type:)->()){
-        var dataArr = [GUOCommitModel]()
-        dispatch_async(dispatch_queue_create("任务", DISPATCH_QUEUE_SERIAL)) {
-            for dict in dicts {
-                let model = GUOCommitModel()
-                model.content = dict["content"] as! String
-                model.id = dict["user"]!!["id"] as! NSNumber
-                model.icon = dict["user"]!!["icon"] as? String
-                model.login = dict["user"]!!["login"]  as? String
-                saveThepicDict(<#T##ID: String##String#>, dict: <#T##NSDictionary#>, page: <#T##Int#>, type: <#T##String#>)
-                dataArr.append(model)
-            }
-            dispatch_async(dispatch_get_main_queue(), { 
-                callBack(dataArr)
-            })
-        }
-    }
-//MARK:数据库处理
-    ///数据库存储字典
-    static func saveThepicDict(ID:String,dict:NSDictionary,page:Int,type:String){
-        //创建异步串行队列缓存数据
-        let data = try! NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted)
-        let str = NSString.init(data: data, encoding: NSUTF8StringEncoding)
-        DuanZModelManger.manger.insertSql(ID, str: str!, page: page, type: type)
-        
-    }
-    ///读取数据字典,返回字典数组
-    static func readTheDict(type:String,page:Int)->[NSDictionary]?{
-        let arrays = NSMutableArray()
-        let dictstr = DuanZModelManger.manger.searchSqlForID(forId: type, page: page)
-        if dictstr?.count == 0{
-            return nil
-        }
-        for str in dictstr!{
-            let data = str.dataUsingEncoding(NSUTF8StringEncoding)
-            let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-            arrays.addObject(dict)
-        }
-        let array = NSArray.init(array: arrays) as! [NSDictionary]
-        return (array)
     }
 
 

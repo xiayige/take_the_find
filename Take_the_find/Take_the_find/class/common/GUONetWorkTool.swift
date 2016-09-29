@@ -15,7 +15,7 @@ class GUONetWorkTool: NSObject {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         AFNetworkReachabilityManager.sharedManager().startMonitoring()
         AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock { (status) in
-            if status == AFNetworkReachabilityStatus.init(rawValue: 0) || status == AFNetworkReachabilityStatus.init(rawValue: 1){
+            if status == AFNetworkReachabilityStatus.init(rawValue: 0) || status == AFNetworkReachabilityStatus.init(rawValue: -1){
                 SVProgressHUD.setBackgroundColor(UIColor.blackColor().colorWithAlphaComponent(0.6))
                 SVProgressHUD.setFont(UIFont.boldSystemFontOfSize(15))
                 SVProgressHUD.showErrorWithStatus("没有网络了")

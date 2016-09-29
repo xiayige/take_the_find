@@ -7,12 +7,14 @@
 //
 
 import UIKit
-
+protocol GUODZDetailviewDelegate:NSObjectProtocol {
+    func sharebtnClick()
+}
 class GUODZDetailview: UIView {
+    weak var sharedelegate:GUODZDetailviewDelegate?
     @IBOutlet weak var nameL: UILabel!
     @IBOutlet weak var iconimageV: UIImageView!
     @IBOutlet weak var bottomV: UIView!
-
     @IBOutlet weak var pictureHC: NSLayoutConstraint!
     @IBOutlet weak var contentL: UILabel!
     @IBOutlet weak var pictureImageV: UIImageView!
@@ -21,6 +23,7 @@ class GUODZDetailview: UIView {
     }
     ///点击分享
     @IBAction func shareClick(sender: AnyObject) {
+        sharedelegate?.sharebtnClick()
     }
     //设置内容
     static func setThecell(model:DuanZModel,callBack:(headV:GUODZDetailview,height:CGFloat)->()){

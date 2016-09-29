@@ -89,27 +89,28 @@ extension PictureModel{
                 let model = PictureModel.modelWithDict(dict)
                 dataArr.append(model)
                 //是否保存到数据库
-                    if istrue{
-                        saveThepicDict(model.id, dict: dict, page: page, type: type)
-                    }
-                i += 1
+                if istrue{
+                    saveThepicDict(model.id, dict: dict, page: page, type: type)
                 }
-            dispatch_async(dispatch_get_main_queue(), { 
-                 callBack(dataArr)
+                i += 1
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+                callBack(dataArr)
             })
         }
     }
 //MARK:数据库处理
     ///数据库存储字典
     static func saveThepicDict(ID:String,dict:NSDictionary,page:Int,type:String){
-            //创建异步串行队列缓存数据
+        print("存图片数据--\(NSThread.currentThread())")
+        //创建异步串行队列缓存数据
             let data = try! NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted)
             let str = NSString.init(data: data, encoding: NSUTF8StringEncoding)
             PictureModelManger.manger.insertSql(ID, str: str!, page: page, type: type)
-       
     }
     ///读取数据字典,返回字典数组
     static func readTheDict(type:String,page:Int)->[NSDictionary]?{
+        print("读图片数据")
         let arrays = NSMutableArray()
         let dictstr = PictureModelManger.manger.searchSqlForID(forId: type, page: page)
         if dictstr?.count == 0{

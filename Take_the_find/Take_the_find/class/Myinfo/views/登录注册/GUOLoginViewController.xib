@@ -73,10 +73,46 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Boq-Ze-SNJ">
+                    <rect key="frame" x="20" y="370" width="70" height="91"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdO-rJ-hSj">
+                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="Fjq-wh-oRe"/>
+                                <constraint firstAttribute="height" constant="70" id="UvP-H7-v7m"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="Share_WeChatSessionIcon_70x70_"/>
+                            <connections>
+                                <action selector="btnWechatClick:" destination="-1" eventType="touchUpInside" id="YSD-ff-cYb"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZU-gG-i92">
+                            <rect key="frame" x="0.0" y="70" width="70" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="Fv5-Xj-Pno"/>
+                                <constraint firstAttribute="width" constant="70" id="vI4-W1-c9X"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="91" id="1OQ-LO-Ajc"/>
+                        <constraint firstItem="WZU-gG-i92" firstAttribute="top" secondItem="zdO-rJ-hSj" secondAttribute="bottom" id="Ov0-cj-ksN"/>
+                        <constraint firstAttribute="width" constant="70" id="Q4H-wT-HZt"/>
+                        <constraint firstItem="zdO-rJ-hSj" firstAttribute="leading" secondItem="Boq-Ze-SNJ" secondAttribute="leading" id="bcE-Dz-s57"/>
+                        <constraint firstItem="WZU-gG-i92" firstAttribute="leading" secondItem="Boq-Ze-SNJ" secondAttribute="leading" id="iFi-c9-K0M"/>
+                        <constraint firstItem="zdO-rJ-hSj" firstAttribute="top" secondItem="Boq-Ze-SNJ" secondAttribute="top" id="l2n-MD-954"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="bDQ-MS-2oX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="7eM-9m-cD7"/>
+                <constraint firstItem="Boq-Ze-SNJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="BDT-Ou-XrI"/>
                 <constraint firstItem="aju-XK-5wA" firstAttribute="top" secondItem="i9B-jw-Z63" secondAttribute="bottom" constant="30" id="CbC-sm-8aX"/>
                 <constraint firstItem="akF-jA-0Mb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="42" id="Dxt-oo-Vt9"/>
                 <constraint firstAttribute="trailing" secondItem="2Zb-rm-EJm" secondAttribute="trailing" constant="50" id="Jt2-h2-LgW"/>
@@ -87,6 +123,7 @@
                 <constraint firstItem="2Zb-rm-EJm" firstAttribute="top" secondItem="aju-XK-5wA" secondAttribute="bottom" constant="-5" id="VM4-SY-n5t"/>
                 <constraint firstItem="akF-jA-0Mb" firstAttribute="top" secondItem="i9B-jw-Z63" secondAttribute="bottom" constant="-5" id="YSM-up-xDM"/>
                 <constraint firstItem="Zi3-N6-uIm" firstAttribute="top" secondItem="aju-XK-5wA" secondAttribute="bottom" constant="35" id="bNV-fP-kKt"/>
+                <constraint firstItem="Boq-Ze-SNJ" firstAttribute="top" secondItem="Zi3-N6-uIm" secondAttribute="bottom" constant="20" id="d6j-vT-mpN"/>
                 <constraint firstAttribute="trailing" secondItem="i9B-jw-Z63" secondAttribute="trailing" constant="50" id="eXG-tD-6hn"/>
                 <constraint firstAttribute="trailing" secondItem="Zi3-N6-uIm" secondAttribute="trailing" constant="30" id="lej-py-aR5"/>
                 <constraint firstItem="2Zb-rm-EJm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="42" id="tDH-nf-pfb"/>
@@ -98,6 +135,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Share_WeChatSessionIcon_70x70_" width="70" height="70"/>
         <image name="icon_ios_up" width="15" height="26"/>
     </resources>
 </document>
