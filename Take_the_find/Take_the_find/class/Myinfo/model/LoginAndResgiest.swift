@@ -51,159 +51,133 @@ extension UserModel{
     static func registRequestData(user:String,password:String,callBack:(dict:NSDictionary?,error:NSError?)->Void){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/register"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
         let para = ["user":user,"password":password]
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            if obj["exist"] != nil{
-                SVProgressHUD.showErrorWithStatus("用户已经存在")
-            }else if obj["error"] != nil{
-                SVProgressHUD.showErrorWithStatus("不能为空")
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                if obj["exist"] != nil{
+                    SVProgressHUD.showErrorWithStatus("用户已经存在")
+                }else if obj["error"] != nil{
+                    SVProgressHUD.showErrorWithStatus("不能为空")
+                }else{
+                    SVProgressHUD.showSuccessWithStatus("注册成功")
+                    callBack(dict: obj, error: nil)
+                }
             }else{
-                SVProgressHUD.showSuccessWithStatus("注册成功")
-                callBack(dict: obj, error: nil)
+                callBack(dict: nil, error: error)
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            }) { (task, error) in
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                SVProgressHUD.showErrorWithStatus("网络失败")
-               callBack(dict: nil, error: error)
         }
     }
     ///登录
     static func checkRequestData(user:String,password:String,callBack:(dict:NSDictionary?,error:NSError?)->Void){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/check"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
         let para = ["user":user,"password":password]
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            if obj["error"] != nil{
-                SVProgressHUD.showErrorWithStatus("登录失败")
-            }else{
-                callBack(dict: obj, error: nil)
-                SVProgressHUD.showSuccessWithStatus("登录成功")
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                if obj["error"] != nil{
+                    SVProgressHUD.showErrorWithStatus("登录失败")
+                }else{
+                    callBack(dict: obj, error: nil)
+                    SVProgressHUD.showSuccessWithStatus("登录成功")
+                }
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }) { (task, error) in
-            SVProgressHUD.showErrorWithStatus("网络失败")
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
-
     }
     ///修改昵称
     static func alterNickrequestData(userid:String,nick:String,calback:(error:NSError?)->Void){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/alterNick"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
         let para = ["userid":userid,"nick":nick]
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-              print((NSString.init(data: data as! NSData, encoding: NSUTF8StringEncoding))!)
-            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            if obj["failed"] != nil{
-                SVProgressHUD.showErrorWithStatus("修改昵称失败")
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                if obj["failed"] != nil{
+                    SVProgressHUD.showErrorWithStatus("修改昵称失败")
+                }else{
+                    SVProgressHUD.showSuccessWithStatus("修改昵称成功")
+                    calback(error: nil)
+                }
             }else{
-                SVProgressHUD.showSuccessWithStatus("修改昵称成功")
-                calback(error: nil)
+                calback(error: error)
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }) { (task, error) in
-            SVProgressHUD.showErrorWithStatus("网络失败")
-            calback(error: error)
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
-
     }
     
     ///修改性别
     static func alterSexrequestData(userid:String,sex:String,calback:(error:NSError?)->Void){
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/alterSex"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
         let para = ["userid":userid,"sex":sex]
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            if obj["failed"] != nil{
-                SVProgressHUD.showErrorWithStatus("修改性别失败")
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                if obj["failed"] != nil{
+                    SVProgressHUD.showErrorWithStatus("修改性别失败")
+                }else{
+                    SVProgressHUD.showSuccessWithStatus("修改性别成功")
+                    calback(error: nil)
+                }
             }else{
-                SVProgressHUD.showSuccessWithStatus("修改性别成功")
-                calback(error: nil)
+                calback(error: error)
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }) { (task, error) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            SVProgressHUD.showErrorWithStatus("网络失败")
-            calback(error: error)
         }
     }
     ///修改生日
     static func alterBirthrequestData(userid:String,birth:String,calback:(error:NSError?)->Void){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/alterBirth"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
         let para = ["userid":userid,"birth":birth]
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            if obj["failed"] != nil{
-                SVProgressHUD.showErrorWithStatus("修改生日失败")
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                if obj["failed"] != nil{
+                    SVProgressHUD.showErrorWithStatus("修改生日失败")
+                }else{
+                    SVProgressHUD.showSuccessWithStatus("修改生日成功")
+                    calback(error: nil)
+                }
             }else{
-                SVProgressHUD.showSuccessWithStatus("修改生日成功")
-                calback(error: nil)
+                calback(error: error)
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }) { (task, error) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            SVProgressHUD.showErrorWithStatus("网络失败")
-            calback(error: error)
         }
     }
     ///修改个性签名
     static func alterSignaturerequestData(userid:String,signature:String,calback:(error:NSError?)->Void){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/alterSignature"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
         let para = ["userid":userid,"signature":signature]
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            if obj["failed"] != nil{
-                SVProgressHUD.showErrorWithStatus("修改个性签名失败")
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                if obj["failed"] != nil{
+                    SVProgressHUD.showErrorWithStatus("修改个性签名失败")
+                }else{
+                    SVProgressHUD.showSuccessWithStatus("修改个性签名成功")
+                    calback(error: nil)
+                }
             }else{
-                SVProgressHUD.showSuccessWithStatus("修改个性签名成功")
-                calback(error: nil)
+                calback(error: error)
             }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }) { (task, error) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            SVProgressHUD.showErrorWithStatus("网络失败")
-            calback(error: error)
         }
     }
     ///修改密码
     static func alterPasswordrequestData(userid:String,password:String,calback:(error:NSError?)->Void){
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = "http://cat666.com/cat666-interface/index.php/index/alterPassword"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
         let para = ["userid":userid,"password":password]
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-            let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            if obj["failed"] != nil{
-                SVProgressHUD.showErrorWithStatus("修改密码失败")
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                if obj["failed"] != nil{
+                    SVProgressHUD.showErrorWithStatus("修改密码失败")
+                }else{
+                    SVProgressHUD.showSuccessWithStatus("修改密码成功")
+                    calback(error: nil)
+                }
             }else{
-                SVProgressHUD.showSuccessWithStatus("修改密码成功")
-                calback(error: nil)
+                calback(error: error)
             }
-             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }) { (task, error) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            SVProgressHUD.showErrorWithStatus("网络失败")
-            calback(error: error)
         }
     }
     ///上传头像

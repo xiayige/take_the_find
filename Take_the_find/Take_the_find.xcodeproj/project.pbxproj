@@ -48,6 +48,8 @@
 		BC659B4F1D952E5400947E12 /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC659B4E1D952E5400947E12 /* SignatureView.xib */; };
 		BC659B511D9530C500947E12 /* alterPicview.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC659B501D9530C500947E12 /* alterPicview.xib */; };
 		BC659B531D95418000947E12 /* alterPassword.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC659B521D95418000947E12 /* alterPassword.xib */; };
+		BC660DEC1D9CEA380095FD4C /* GUONetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC660DEB1D9CEA380095FD4C /* GUONetWorkTool.swift */; };
+		BC660DEE1D9D14070095FD4C /* DuanZModelManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC660DED1D9D14070095FD4C /* DuanZModelManger.swift */; };
 		BC669EB61D91217800892ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC669EB51D91217800892ED0 /* Assets.xcassets */; };
 		BC669EB91D91217800892ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC669EB71D91217800892ED0 /* LaunchScreen.storyboard */; };
 		BC6A3A6D1D9270F700025A4C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6A39DE1D9270F700025A4C /* Constant.swift */; };
@@ -140,6 +142,8 @@
 		BC659B4E1D952E5400947E12 /* SignatureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignatureView.xib; sourceTree = "<group>"; };
 		BC659B501D9530C500947E12 /* alterPicview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = alterPicview.xib; sourceTree = "<group>"; };
 		BC659B521D95418000947E12 /* alterPassword.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = alterPassword.xib; sourceTree = "<group>"; };
+		BC660DEB1D9CEA380095FD4C /* GUONetWorkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUONetWorkTool.swift; sourceTree = "<group>"; };
+		BC660DED1D9D14070095FD4C /* DuanZModelManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuanZModelManger.swift; sourceTree = "<group>"; };
 		BC669EAB1D91217800892ED0 /* Take_the_find.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Take_the_find.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC669EB51D91217800892ED0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC669EB81D91217800892ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -383,6 +387,7 @@
 		BC6A39DD1D9270F700025A4C /* common */ = {
 			isa = PBXGroup;
 			children = (
+				BC660DEB1D9CEA380095FD4C /* GUONetWorkTool.swift */,
 				BC6A39DE1D9270F700025A4C /* Constant.swift */,
 				BC6A39DF1D9270F700025A4C /* GUOBaseViewController.swift */,
 			);
@@ -413,6 +418,7 @@
 		BC6A39E31D9270F700025A4C /* model */ = {
 			isa = PBXGroup;
 			children = (
+				BC660DED1D9D14070095FD4C /* DuanZModelManger.swift */,
 				BC5CB1011D98F85900A57B17 /* DuanZModel.swift */,
 				BC1A3E121D9A9509004258CF /* GUOCommitModel.swift */,
 			);
@@ -728,6 +734,7 @@
 			files = (
 				BC6A3A701D9270F700025A4C /* AppDelegate.swift in Sources */,
 				BC4EF3801D93AA0100748931 /* LoginAndResgiest.swift in Sources */,
+				BC660DEC1D9CEA380095FD4C /* GUONetWorkTool.swift in Sources */,
 				BC659B2D1D95218D00947E12 /* GUOLoginViewController.swift in Sources */,
 				BC6A3A771D9270F700025A4C /* PictureViewController.swift in Sources */,
 				BC6A3A741D9270F700025A4C /* NextViewController.swift in Sources */,
@@ -737,6 +744,7 @@
 				BC659B401D95240500947E12 /* STPickerDate.m in Sources */,
 				BC659B311D95218D00947E12 /* DisMissAnimation.swift in Sources */,
 				BC6A3A791D9270F700025A4C /* GUOPictureSearchCell.swift in Sources */,
+				BC660DEE1D9D14070095FD4C /* DuanZModelManger.swift in Sources */,
 				BC6A3A731D9270F700025A4C /* GUOSerachDetailViewController.swift in Sources */,
 				BC6A3AAD1D9270F700025A4C /* GUOVideosViewController.swift in Sources */,
 				BCB391AE1D9BB9AC003B9495 /* FMDatabase.m in Sources */,

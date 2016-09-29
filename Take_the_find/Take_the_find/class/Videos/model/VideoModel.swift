@@ -75,21 +75,57 @@ extension VideoModel{
             return
         }
         let url = "http://cat666.com/cat666-interface/index.php/index/getRecommend"
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: nil) { (data, error) in
+            if error == nil{
+                let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let dicts = detailDict(dict)
+                let id = dicts.2[0].id
+                saveTheDict(id, dict: dict)
+                callBack(bannarArray: dicts.2, cateArray: dicts.0, modelsArray: dicts.1, error: nil)
+            }else{
+                callBack(bannarArray: nil, cateArray: nil, modelsArray: nil, error: error)
+            }
+        }
+    }
+          ///获取视频详细信息
+    static func requestgetVideoInfoData(videoID:String,callBack:(usermodel:UserModel?,videomodel:VideoModel?,error:NSError?)->Void){
+        let url = "http://cat666.com/cat666-interface/index.php/index/getVideoInfo"
+        let para = NSMutableDictionary()
+        para["videoid"] = videoID
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let videoM = VideoModel.modelwithDict(obj["video"] as! [String:String])
+                let userM = UserModel.modelWithDict(obj["user"] as! [String:String])
+                callBack(usermodel: userM, videomodel: videoM, error:nil)
+            }else{
+                callBack(usermodel:nil, videomodel: nil, error: error)
+            }
+        }
+    }
+    ///获取弹幕
+    static func requestgetDanmu(videoID:String,callBack:(danmuArr:[String]?,error:NSError?)->Void){
+        let url = "http://cat666.com/cat666-interface/index.php/index/getDanmu"
         let manger = AFHTTPSessionManager()
         manger.responseSerializer = AFHTTPResponseSerializer()
-        manger.GET(url, parameters: nil, progress: nil, success: { (task, data) in
-            let dict = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            let dicts = detailDict(dict)
-            let id = dicts.2[0].id
-            saveTheDict(id, dict: dict)
-            callBack(bannarArray: dicts.2, cateArray: dicts.0, modelsArray: dicts.1, error: nil)
-            }) { (task, error) in
-                SVProgressHUD.showErrorWithStatus("获取首页视频请求失败")
-                callBack(bannarArray: nil, cateArray: nil, modelsArray: nil, error: error)
+        let para = NSMutableDictionary()
+        para["id"] = videoID
+        GUONetWorkTool.netWorkToolGetWithUrl(url, parameters: para) { (data, error) in
+            if error == nil{
+                var strArr = [String]()
+                let obj = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
+                for dict in obj{
+                    let str = dict["danmu"] as! String
+                    strArr.append(str)
+                }
+                callBack(danmuArr: strArr, error: nil)
+            }else{
+                callBack(danmuArr: nil, error: error)
+            }
         }
     }
     ///将数据进行处理
-  static func detailDict(dict:NSDictionary)->([String],NSMutableArray,[VideoModel]){
+    static func detailDict(dict:NSDictionary)->([String],NSMutableArray,[VideoModel]){
         var cateArray = [String]()
         let modelsArray = NSMutableArray()
         var bannarArray = [VideoModel]()
@@ -117,6 +153,8 @@ extension VideoModel{
         }
         return(cateArray,modelsArray,bannarArray)
     }
+
+//MARK:数据库处理
     ///数据库存储字典
     static func saveTheDict(ID:String,dict:NSDictionary){
         print("存储视频数据")
@@ -126,7 +164,7 @@ extension VideoModel{
     }
     ///读取数据字典,返回字典数组
     static func readTheDict()->NSDictionary?{
-         print("读取视频数据")
+        print("读取视频数据")
         let str = VideoModelManger.manger.searchSql()
         if str == nil{
             return nil
@@ -135,42 +173,5 @@ extension VideoModel{
         let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
         return dict
     }
-    ///获取视频详细信息
-    static func requestgetVideoInfoData(videoID:String,callBack:(usermodel:UserModel?,videomodel:VideoModel?,error:NSError?)->Void){
-        let url = "http://cat666.com/cat666-interface/index.php/index/getVideoInfo"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
-        let para = NSMutableDictionary()
-        para["videoid"] = videoID
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-                let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            let videoM = VideoModel.modelwithDict(obj["video"] as! [String:String])
-            let userM = UserModel.modelWithDict(obj["user"] as! [String:String])
-            callBack(usermodel: userM, videomodel: videoM, error:nil)
-            }) { (task, error) in
-                SVProgressHUD.showErrorWithStatus("获取视频详细信息请求失败")
-                callBack(usermodel:nil, videomodel: nil, error: error)
-        }
-    }
-    ///获取弹幕
-    static func requestgetDanmu(videoID:String,callBack:(danmuArr:[String]?,error:NSError?)->Void){
-        let url = "http://cat666.com/cat666-interface/index.php/index/getDanmu"
-        let manger = AFHTTPSessionManager()
-        manger.responseSerializer = AFHTTPResponseSerializer()
-        let para = NSMutableDictionary()
-        para["id"] = videoID
-        manger.POST(url, parameters: para, progress: nil, success: { (task, data) in
-           var strArr = [String]()
-                let obj = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSArray
-                for dict in obj{
-                    let str = dict["danmu"] as! String
-                    strArr.append(str)
-                }
-            callBack(danmuArr: strArr, error: nil)
-            
-        }) { (task, error) in
-            SVProgressHUD.showErrorWithStatus("获取弹幕请求失败")
-           callBack(danmuArr: nil, error: error)
-        }
-    }
+
 }
