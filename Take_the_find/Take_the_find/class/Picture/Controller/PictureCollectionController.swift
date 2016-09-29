@@ -61,6 +61,8 @@ class PictureCollectionController: UICollectionViewController,UICollectionViewDe
                     print(error)
                     SVProgressHUD.dismiss()
                 }
+                self.collectionView?.mj_header.endRefreshing()
+                self.collectionView?.mj_footer.endRefreshing()
             }
         })
         self.collectionView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
@@ -80,6 +82,8 @@ class PictureCollectionController: UICollectionViewController,UICollectionViewDe
                     print(error)
                     SVProgressHUD.dismiss()
                 }
+                self.collectionView?.mj_header.endRefreshing()
+                self.collectionView?.mj_footer.endRefreshing()
             }
         })
         self.collectionView?.mj_header.beginRefreshing()

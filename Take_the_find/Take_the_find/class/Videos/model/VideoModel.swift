@@ -42,7 +42,7 @@ class VideoModel: NSObject {
     ///收藏数
     var sword:String!
     ///弹幕数量
-    var videodanmu:String?
+    var videodanmu:String? = "0"
     ///cell的高度
     var cellH:CGFloat = 245
     ///观察属性
@@ -67,41 +67,73 @@ class VideoModel: NSObject {
 extension VideoModel{
     ///获取首页视频
     static func requestgetRecommendVideoData(callBack:(bannarArray:[VideoModel]?,cateArray:[String]?,modelsArray:NSMutableArray?,error:NSError?)->Void){
+        print("11111")
+        if let dicts = readTheDict(){
+            let dict = dicts
+            let dicts = detailDict(dict)
+            callBack(bannarArray: dicts.2, cateArray: dicts.0, modelsArray: dicts.1, error: nil)
+            return
+        }
         let url = "http://cat666.com/cat666-interface/index.php/index/getRecommend"
         let manger = AFHTTPSessionManager()
         manger.responseSerializer = AFHTTPResponseSerializer()
         manger.GET(url, parameters: nil, progress: nil, success: { (task, data) in
             let dict = try! NSJSONSerialization.JSONObjectWithData(data as! NSData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            var cateArray = [String]()
-            let modelsArray = NSMutableArray()
-            var bannarArray = [VideoModel]()
-            for (key , _) in dict {
-                let str = key as! String
-                let dictArr = dict[str] as! [[String:String]]
-                let str1 = str.stringByReplacingOccurrencesOfString("!@#$%^&*", withString: "")
-                if str1 == "体育"{
-                    continue
-                }
-                if str1 == "0"{
-                    for modeldict in dictArr{
-                        let model = VideoModel.modelwithDict(modeldict)
-                        bannarArray.append(model)
-                    }
-                    continue
-                }
-                let modelArray = NSMutableArray()
-                for modeldict in dictArr{
-                    let model = VideoModel.modelwithDict(modeldict)
-                    modelArray.addObject(model)
-                }
-                cateArray.append(str1)
-                modelsArray.addObject(modelArray)
-            }
-            callBack(bannarArray: bannarArray, cateArray: cateArray, modelsArray: modelsArray, error: nil)
+            let dicts = detailDict(dict)
+            let id = dicts.2[0].id
+            saveTheDict(id, dict: dict)
+            callBack(bannarArray: dicts.2, cateArray: dicts.0, modelsArray: dicts.1, error: nil)
             }) { (task, error) in
                 SVProgressHUD.showErrorWithStatus("获取首页视频请求失败")
                 callBack(bannarArray: nil, cateArray: nil, modelsArray: nil, error: error)
         }
+    }
+    ///将数据进行处理
+  static func detailDict(dict:NSDictionary)->([String],NSMutableArray,[VideoModel]){
+        var cateArray = [String]()
+        let modelsArray = NSMutableArray()
+        var bannarArray = [VideoModel]()
+        for (key , value ) in dict {
+            let str = key as! NSString
+            let dictvalue = value as! [[String:AnyObject]]
+            let str1 = str.stringByReplacingOccurrencesOfString("!@#$%^&*", withString: "")
+            if str1 == "体育"{
+                continue
+            }
+            if str1 == "0"{
+                for modeldict in dictvalue{
+                    let model = VideoModel.modelwithDict(modeldict as! [String : String])
+                    bannarArray.append(model)
+                }
+                continue
+            }
+            let modelArray = NSMutableArray()
+            for modeldict in dictvalue{
+                let model = VideoModel.modelwithDict(modeldict as! [String : String])
+                modelArray.addObject(model)
+            }
+            cateArray.append(str1)
+            modelsArray.addObject(modelArray)
+        }
+        return(cateArray,modelsArray,bannarArray)
+    }
+    ///数据库存储字典
+    static func saveTheDict(ID:String,dict:NSDictionary){
+        print("存储视频数据")
+        let data = try! NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted)
+        let str = NSString.init(data: data, encoding: NSUTF8StringEncoding)
+        VideoModelManger.manger.insertSql(ID, str: str!)
+    }
+    ///读取数据字典,返回字典数组
+    static func readTheDict()->NSDictionary?{
+         print("读取视频数据")
+        let str = VideoModelManger.manger.searchSql()
+        if str == nil{
+            return nil
+        }
+        let data = str!.dataUsingEncoding(NSUTF8StringEncoding)
+        let dict = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+        return dict
     }
     ///获取视频详细信息
     static func requestgetVideoInfoData(videoID:String,callBack:(usermodel:UserModel?,videomodel:VideoModel?,error:NSError?)->Void){

@@ -104,3 +104,13 @@ extension GUOVideosViewController:UITableViewDataSource,UITableViewDelegate{
         }
     }
 }
+extension GUOVideosViewController{
+    //写入数据库
+    func saveToDataBase(){
+        
+    }
+    //从数据库读出数据
+    func readDataBase(){
+        
+    }
+}
